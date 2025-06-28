@@ -6,12 +6,14 @@ from yougotmail.retrieve.retrieve_attachments import RetrieveAttachments
 from yougotmail.storage.storage import Storage
 from yougotmail.quick.quick import Quick
 from yougotmail._utils._validation import validate_inputs, EMAIL_VALIDATION_RULES, ValidationError
+from yougotmail.ai.ai import AI
 
 class YouGotMail:
     def __init__(self,
                  client_id,
                  client_secret,
                  tenant_id,
+                 open_ai_api_key="",
                  mongo_url="",
                  mongo_db_name="",
                  aws_access_key_id="",
@@ -32,6 +34,7 @@ class YouGotMail:
         self.storage = Storage(mongo_url, mongo_db_name, aws_access_key_id, aws_secret_access_key, region_name, bucket_name, email_collection, conversation_collection, attachment_collection)
         self.quick = Quick(client_id, client_secret, tenant_id, mongo_url, mongo_db_name, aws_access_key_id, aws_secret_access_key, region_name, bucket_name, email_collection, conversation_collection, attachment_collection)
         self.reply = Reply(client_id, client_secret, tenant_id)
+        self.ai = AI(client_id, client_secret, tenant_id, open_ai_api_key)
 
 # Functions handling email retrieval and conversation retrieval
     @validate_inputs(**EMAIL_VALIDATION_RULES)
@@ -218,3 +221,63 @@ class YouGotMail:
                        ):
         return self.reply.reply_to_email(inbox, email_id, email_body, cc_recipients, bcc_recipients)
 
+    def ai_structured_output_from_email_body(self, 
+                                        email_body,
+                                        schema
+                                        ):
+        return self.ai.ai_structured_output_from_email_body(
+            email_body=email_body, 
+            schema=schema
+            )
+
+    @validate_inputs(**EMAIL_VALIDATION_RULES)
+    def ai_get_emails_with_structured_output(self, *,
+                   inbox=[],
+                   range="",
+                   start_date="", # can be date: YYYY-MM-DD or datetime YYYY-MM-DDT00:00:00Z
+                   start_time="",
+                   end_date="", # can be date: YYYY-MM-DD or datetime YYYY-MM-DDT00:00:00Z
+                   end_time="",
+                   subject=[],
+                   sender_name=[],
+                   sender_address=[],
+                   recipients=[],
+                   cc=[],
+                   bcc=[],
+                   folder_path=[],
+                   drafts=False,
+                   archived=False,
+                   deleted=False,
+                   sent=False,
+                   read="all",
+                   attachments=True,
+                   storage=None,
+                   schema={}
+                   ):
+        # Add custom validation logic specific to this function
+        if range and (start_date or end_date or start_time or end_time):
+            raise ValidationError("Cannot specify both 'range' and custom date/time parameters")
+        
+        return self.ai.ai_get_emails_with_structured_output(
+            inbox=inbox,
+            range=range,
+            start_date=start_date,
+            start_time=start_time,
+            end_date=end_date,
+            end_time=end_time,
+            subject=subject,
+            sender_name=sender_name,
+            sender_address=sender_address,
+            recipients=recipients,
+            cc=cc,
+            bcc=bcc,
+            folder_path=folder_path,
+            drafts=drafts,
+            archived=archived,
+            deleted=deleted,
+            sent=sent,
+            read=read,
+            attachments=attachments,
+            storage=storage,
+            schema=schema
+            )

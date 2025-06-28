@@ -17,9 +17,9 @@ class RetrieveEmails:
                  aws_secret_access_key="",
                  region_name="",
                  bucket_name="",
-                 email_collection="emails",
-                 conversation_collection="conversations",
-                 attachment_collection="attachments"
+                 email_collection="",
+                 conversation_collection="",
+                 attachment_collection=""
                  ):
         self.utils = Utils()
         self.token = self.utils._generate_MS_graph_token(client_id, client_secret, tenant_id)
@@ -178,8 +178,13 @@ class RetrieveEmails:
                 return None
 
             if len(emails_list) == 0:
+                result = {
+                    "inbox": inbox,
+                    "number_of_emails_found": 0,
+                    "emails": []
+                }
                 print(f"No emails found in inbox {inbox} for the given filters")
-                return None
+                return result
             
             # Sort emails by received_date, most recent first
             def safe_parse_date(email):

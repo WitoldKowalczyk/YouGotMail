@@ -6,8 +6,8 @@ import yougotmail.ai._ai_schemas as schemas
 from textwrap import dedent
 
 class AIHandler:
-    def __init__(self, prompt="", prompt_name="", schema_name="", schema="", content="", model="gpt-4.1", reasoning_effort=""):
-        self.client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+    def __init__(self, open_ai_api_key="", prompt="", prompt_name="", schema_name="", schema="", content="", model="gpt-4.1", reasoning_effort=""):
+        self.client = OpenAI(api_key=open_ai_api_key)
         self.prompt = prompt
         self.prompt_name = prompt_name
         self.schema_name = schema_name
@@ -51,7 +51,6 @@ class AIHandler:
             print(f"\033[1;35mError in 3A4BE42D-4C6F-46A2-A2B7-6478A00FF9A2: {str(e)}\033[0m")
 
     def completions(self):
-
         prompt = getattr(self.prompts, self.prompt_name)
 
         completion = self.client.chat.completions.create(

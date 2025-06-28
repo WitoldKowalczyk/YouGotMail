@@ -22,3 +22,4 @@ def test_get_emails():
             json.dump(emails, f, indent=4)
     except Exception as e:
         print(f"Error: {e}")
+
