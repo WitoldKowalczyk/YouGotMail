@@ -1,0 +1,16 @@
+__pycache__/
+**/__pycache__/
+.pytest_cache/
+aws_lambda/
+_subscription.py
+_webhook.json
+.env
+emails.json
+
+
+*.pyc
+*.egg-info/
+dist/
+build/
+_DS_Store
+
