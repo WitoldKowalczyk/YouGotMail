@@ -7,6 +7,7 @@ _webhook.json
 .env
 emails.json
 emails_structured_output.json
+yougotmail.egg-info
 
 
 *.pyc
@@ -15,4 +16,5 @@ dist/
 build/
 _DS_Store
 _deploy.txt
+.pylintrc
 

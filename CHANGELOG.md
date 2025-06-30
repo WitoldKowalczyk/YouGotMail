@@ -16,4 +16,10 @@ All notable changes to this project will be documented in this file.
 ### Added
 - minor fixes
 
+## [0.0.4] - 2025-06-30
+### Added
+- `send_email()` method for sending emails from MS Outlook.
+- minor fixes
+- updated docs
+
 

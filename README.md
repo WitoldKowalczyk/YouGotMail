@@ -2,6 +2,15 @@
 
 Easily build AI Agents in MS Outlook.
 
+![cover_image](public/cover_image.png)
+
+Table of Contents
+- [Introduction](#introduction)
+- [Quickstart](#quickstart)
+- [Getting MS credentials and setting up your inbox](#getting-ms-credentials-and-setting-up-your-inbox)
+- [Structured Outputs from emails with OpenAI](#structured-outputs-from-emails-with-openai)
+- [Roadmap & Planned functionalities](#roadmap--planned-functionalities)
+
 ## Introduction
 
 MS Outlook is one of the most popular email clients among enterprises and business users.
@@ -19,9 +28,7 @@ This library is meant to facilitate that. At the same time it will offer 3 types
 - an AI Agent that lives in your inbox and handles email work for you
 - an AI agent that acts as a standalone inbox operatord can be used as an AI interface
 
-![cover_image](public/cover_image.png)
-
-## Quickstart
+## Quickstart: getting emails
 
 You will first need to set-up MS email credentials for your inbox. See [Getting MS credentials and setting up your inbox](#getting-ms-credentials-and-setting-up-your-inbox) for instructions. If you have those credentials, you can run the code below.
 
@@ -143,7 +150,7 @@ Step 7: Run Quickstart code
 
 You can now run the Quickstart code by passing
 
-## Structured Outputs from emails with OpenAI
+## Quickstart: Structured Outputs from emails with OpenAI
 
 You can pass your OpenAI API key to the YouGotMail class and call the `ai_get_emails_with_structured_output()` method to retrieve emails from MS Outlook and have OpenAI structured output from the email body. You will need to pass a schema of the info you want extracted from the email body.
 
@@ -166,23 +173,59 @@ emails = ygm.ai_get_emails_with_structured_output(
     range="last_8_hours",
     attachments=False,
     schema={
-        "topic": {
-            "type": "string",
-            "description": "The topic of the email"
-            },
-        "sentiment": {
-            "type": "string",
-            "description": "what was the mood of the email"
-            }
-            }
-            )
+        "topic": {"type": "string", "description": "The topic of the email"},
+        "sentiment": {"type": "string", "description": "what was the mood of the email"}
+        }
+        )
 
 print(emails)
 ```
 
+## Quickstart: Sending emails
+
+```python
+import os
+from yougotmail import YouGotMail
+
+inbox = "yougotmail@outlook.com" # the email address of the inbox from which you will be sending
+
+ygm = YouGotMail(
+    client_id=os.environ.get("MS_CLIENT_ID"),
+    client_secret=os.environ.get("MS_CLIENT_SECRET"),
+    tenant_id=os.environ.get("MS_TENANT_ID")
+)
+
+result = ygm.send_email(
+    inbox=inbox,
+    subject="Meeting Follow-up",
+    importance="Normal", # "Low", "Normal", or "High" or empty
+    email_body="<html><body><h1>Test Email</h1><p>This is a test email sent from YouGotMail.</p></body></html>", # Structure in HTML
+    to_recipients=["colleague@company.com", "manager@company.com"], # list of email addresses
+    cc_recipients=["team-lead@company.com"], # list of email addresses
+    bcc_recipients=[], # list of email addresses
+    attachments=["https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png"] # list of file paths to attach
+)
+
+print(result)
+
+# Returns:
+# {
+#     "status": "success",
+#     "message": "Email sent successfully",
+#     "recipients": {
+#         "to": ["colleague@company.com", "manager@company.com"],
+#         "cc": ["team-lead@company.com"],
+#         "bcc": []
+#     },
+#     "subject": "Meeting Follow-up",
+#     "body": "Hi team,..."
+# }
+```
+
+
 ## Roadmap & Planned functionalities
 
-I will be releasing updates every few days after I complete the testing for the given functions.
+I will be releasing updates every few days after I complete the testing for the given methods.
 
 Here are the planned capabilities:
 

@@ -1,12 +1,22 @@
 from openai import OpenAI
-import os
 import json
 import yougotmail.ai._ai_prompts as prompts
 import yougotmail.ai._ai_schemas as schemas
 from textwrap import dedent
 
+
 class AIHandler:
-    def __init__(self, open_ai_api_key="", prompt="", prompt_name="", schema_name="", schema="", content="", model="gpt-4.1", reasoning_effort=""):
+    def __init__(
+        self,
+        open_ai_api_key="",
+        prompt="",
+        prompt_name="",
+        schema_name="",
+        schema="",
+        content="",
+        model="gpt-4.1",
+        reasoning_effort="",
+    ):
         self.client = OpenAI(api_key=open_ai_api_key)
         self.prompt = prompt
         self.prompt_name = prompt_name
@@ -38,17 +48,19 @@ class AIHandler:
                 temperature=0.0,
                 messages=[
                     {"role": "system", "content": dedent(prompt)},
-                    {"role": "user", "content": self.content}
-                    ],
-                response_format=schema
-                )
-            
+                    {"role": "user", "content": self.content},
+                ],
+                response_format=schema,
+            )
+
             response_content = json.loads(completion.choices[0].message.content)
 
             return response_content
-        
+
         except Exception as e:
-            print(f"\033[1;35mError in 3A4BE42D-4C6F-46A2-A2B7-6478A00FF9A2: {str(e)}\033[0m")
+            print(
+                f"\033[1;35mError in 3A4BE42D-4C6F-46A2-A2B7-6478A00FF9A2: {str(e)}\033[0m"
+            )
 
     def completions(self):
         prompt = getattr(self.prompts, self.prompt_name)
@@ -57,9 +69,9 @@ class AIHandler:
             model=self.model,
             messages=[
                 {"role": "system", "content": dedent(prompt)},
-                {"role": "user", "content": self.content}
+                {"role": "user", "content": self.content},
             ],
-            max_tokens=100
+            max_tokens=100,
         )
         response_content = completion.choices[0].message.content.strip()
         print(response_content)
@@ -70,12 +82,8 @@ class AIHandler:
             response = self.client.chat.completions.create(
                 model=self.model,
                 reasoning_effort=self.reasoning_effort,
-                messages=[{
-                    "role": "user",
-                    "content": self.content
-                    }
-                ]
-            )   
-            return response.choices[0].message.content 
+                messages=[{"role": "user", "content": self.content}],
+            )
+            return response.choices[0].message.content
         except Exception as e:
             print(f"An error occurred: {e}")
