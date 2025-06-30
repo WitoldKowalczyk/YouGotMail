@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="yougotmail",
-    version="0.0.1",
+    version="0.0.3",
     description="Easily create AI Agents in MS Outlook",
     long_description=open("README.md", encoding="utf-8").read(),
     long_description_content_type="text/markdown",
@@ -14,13 +14,10 @@ setup(
     install_requires=[
         "requests",
         "python-dotenv",
-        "nanoid",
         "boto3",
         "pymongo",
-        "markdownify",
         "openai",
-        "python-dateutil",
-        "bson"
+        "python-dateutil"
     ],
     classifiers=[
         "Programming Language :: Python :: 3.10",

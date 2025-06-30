@@ -6,6 +6,7 @@ _subscription.py
 _webhook.json
 .env
 emails.json
+emails_structured_output.json
 
 
 *.pyc
@@ -13,4 +14,5 @@ emails.json
 dist/
 build/
 _DS_Store
+_deploy.txt
 
