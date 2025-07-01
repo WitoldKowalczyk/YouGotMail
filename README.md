@@ -1,34 +1,33 @@
 # You've Got Mail
 
-Easily build AI Agents in MS Outlook.
+## TL;DR 📝
+
+### What 🤖
+- 🤖 easy-to-use SDK for retrieving and sending emails with MS Outlook's API
+- 🤖 AI tools to automate tasks in your MS Outlookinbox
+- 🛠️ Personal Email Assistant: full AI Agent that lives in your inbox and does work for you
+- 📨 AI co-worker: turn an email address into an AI Agent that can perform tasks for you
+
+### Stack 📦
+- 🐍 Python
+- 🧠 OpenAI
+- 📧 MS Outlook API
+- 🗄️ MongoDB
+- ☁️ AWS
+
+### Why 🤔
+- 📬 over 1/3rd of every job is email-based
+- 🤖 automating work means automating emails
+- ✨ AI + Email = 🔥
+
+### Note on version and next steps
+- **status**: all methods listed below *should* be working, however I haven't had time to unit test them and write proper error handling. The docs below outline what has been tested and not. I will be updating the version and status over the summer
+- **current version**: 0.0.4
+- **last update**: 2025-07-02
 
 ![cover_image](public/cover_image.png)
 
-Table of Contents
-- [Introduction](#introduction)
-- [Quickstart](#quickstart)
-- [Getting MS credentials and setting up your inbox](#getting-ms-credentials-and-setting-up-your-inbox)
-- [Structured Outputs from emails with OpenAI](#structured-outputs-from-emails-with-openai)
-- [Roadmap & Planned functionalities](#roadmap--planned-functionalities)
-
-## Introduction
-
-MS Outlook is one of the most popular email clients among enterprises and business users.
-In some roles - handling email is almost the entire job. People receive emails, extract data from them, pass that data to other systems, retrieve data from those systems and send it via email. And so it goes.
-
-Hence, building AI solutions that can 
-
-Furthermore, emails are a natural communication method that humans know and use daily.
-Creating AI Agents that can live in an email environment offers a natural way of interacting with AI systems. For example an AI CC'd into a conversation could easily perform tasks that the parties of the email thread want handled.
-
-Building integrations into MS Outlook is particularly painful. because (as all things Microsoft) the API has many rules that make it time-consuming to build anything.
-
-This library is meant to facilitate that. At the same time it will offer 3 types of AI solutions:
-- a set of AI helper functions meant to facilite the work with email retrieval and email sending (e.g. structured outputs from emails)
-- an AI Agent that lives in your inbox and handles email work for you
-- an AI agent that acts as a standalone inbox operatord can be used as an AI interface
-
-## Quickstart: getting emails
+## Quickstart
 
 You will first need to set-up MS email credentials for your inbox. See [Getting MS credentials and setting up your inbox](#getting-ms-credentials-and-setting-up-your-inbox) for instructions. If you have those credentials, you can run the code below.
 
@@ -37,21 +36,20 @@ pip install yougotmail
 ```
 
 ```python
-import os
 from yougotmail import YouGotMail
 
 inbox = "yougotmail@outlook.com" # the email address of the inbox on which you will be operating
 
 ygm = YouGotMail(
-    client_id=os.environ.get("MS_CLIENT_ID"),
-    client_secret=os.environ.get("MS_CLIENT_SECRET"),
-    tenant_id=os.environ.get("MS_TENANT_ID")
+    client_id="MS_CLIENT_ID",
+    client_secret="MS_CLIENT_SECRET",
+    tenant_id="MS_TENANT_ID"
 )
 
 emails = ygm.get_emails(
-    inbox=[inbox], # list of inboxes from which you're retrieving emails
+    inbox=[inbox], # list of inboxes from which you're retrieving email
     range="last_30_minutes", # the time range 
-    attachments=False # whether to include attachments in the emails or not
+    attachments=False # whether to include attachments in the returned email or not
 )
 
 print(emails)
@@ -76,12 +74,41 @@ Possible time ranges are
 """
 ```
 
+## Table of Contents
+
+- [Quickstart](#quickstart)
+- [Introduction](#introduction)
+- [Getting MS credentials and setting up your inbox](#getting-ms-credentials-and-setting-up-your-inbox)
+- [Structured Outputs from emails with OpenAI](#structured-outputs-from-emails-with-openai)
+- [Roadmap & Planned functionalities](#roadmap--planned-functionalities)
+
+## Introduction
+
+Microsoft Outlook is one of the most popular email clients among enterprises and business users.
+In some roles - handling email is almost the entire job. People receive emails, extract data from them, pass that data to other systems, retrieve data from those systems and send it via email. And so it goes.
+
+Hence, building AI solutions that can 
+
+Furthermore, emails are a natural communication method that humans know and use daily.
+Creating AI Agents that can live in an email environment offers a natural way of interacting with AI systems. For example an AI CC'd into a conversation could easily perform tasks that the parties of the email thread want handled.
+
+Building integrations into MS Outlook is particularly painful. because (as all things Microsoft) the API has many rules that make it time-consuming to build anything.
+
+This library is meant to facilitate that. At the same time it will offer 3 types of AI solutions:
+- a set of AI helper functions meant to facilite the work with email retrieval and email sending (e.g. structured outputs from emails)
+- an AI Agent that lives in your inbox and handles email work for you
+- an AI agent that acts as a standalone inbox operatord can be used as an AI interface
+
+The goal is to provide:
+- easy way to build an AI agent working on actual emails (ie. your personal inbox)
+- easily spin up Outlook native agents with a few pre-defined instructions from users: turn an email address into a logistics dispatcher, a lawyer, a contract manager, a customer support specialist or more
+
 ## Getting MS credentials and setting up your inbox
 
-To connect yougotmail to your Outlook inbox we need to do 3 things:
+To initialize the YouGotMail class to work with your Outlook inbox we need to do 3 things:
 
 1. Create a new "app" in Azure Entra  
-2. Grant this app permissions to access the various email functionalities (read, draft, send)
+2. Grant this app permissions to access the various MS email APIs (read, draft, send)
 3. Retrieve 3 unique ids that will be used to authenticate access to the inbox:
     - client_id
     - client_secret 
@@ -89,7 +116,7 @@ To connect yougotmail to your Outlook inbox we need to do 3 things:
 
 ### Step 1: Login to your Microsoft Entra account at https://entra.microsoft.com/
 
-You can use your normal MS login. Ideally you should be the admin user in your org. If not that's ok, we will need to ask the admin to authorize the specific conditions.
+You can use your normal MS login. Ideally you should be the admin user in your org. If not that's ok, you will need to ask the admin to authorize the authorization.
 
 ### Step 2: Go into Applications & Retrieve the Tenant Id
 
@@ -148,23 +175,22 @@ Finally, each permission requires Admin access. If you're the Admin you can clic
 
 Step 7: Run Quickstart code
 
-You can now run the Quickstart code by passing
+You can now run the Quickstart code by passing your credentials to the YouGotMail class.
 
-## Quickstart: Structured Outputs from emails with OpenAI
+## Quickstart #2: Structured Outputs from emails with OpenAI
 
 You can pass your OpenAI API key to the YouGotMail class and call the `ai_get_emails_with_structured_output()` method to retrieve emails from MS Outlook and have OpenAI structured output from the email body. You will need to pass a schema of the info you want extracted from the email body.
 
 ```python
-import os
 from yougotmail import YouGotMail
 
 inbox = "yougotmail@outlook.com" # the email address of the inbox on which you will be operating
 
 ygm = YouGotMail(
-            client_id=os.environ.get("MS_CLIENT_ID"),
-            client_secret=os.environ.get("MS_CLIENT_SECRET"),
-            tenant_id=os.environ.get("MS_TENANT_ID"),
-            open_ai_api_key=os.environ.get("OPENAI_API_KEY")
+            client_id="MS_CLIENT_ID",
+            client_secret="MS_CLIENT_SECRET",
+            tenant_id="MS_TENANT_ID",
+            open_ai_api_key="OPENAI_API_KEY"
             )
 
 
@@ -181,18 +207,17 @@ emails = ygm.ai_get_emails_with_structured_output(
 print(emails)
 ```
 
-## Quickstart: Sending emails
+## Quickstart #3: Sending emails
 
 ```python
-import os
 from yougotmail import YouGotMail
 
 inbox = "yougotmail@outlook.com" # the email address of the inbox from which you will be sending
 
 ygm = YouGotMail(
-    client_id=os.environ.get("MS_CLIENT_ID"),
-    client_secret=os.environ.get("MS_CLIENT_SECRET"),
-    tenant_id=os.environ.get("MS_TENANT_ID")
+    client_id="MS_CLIENT_ID",
+    client_secret="MS_CLIENT_SECRET",
+    tenant_id="MS_TENANT_ID"
 )
 
 result = ygm.send_email(
