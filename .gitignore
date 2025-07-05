@@ -1,14 +1,15 @@
 __pycache__/
 **/__pycache__/
 .pytest_cache/
-aws_lambda/
+agent_1_personal_assistant/
+agent_2_digital_co_worker/
 _subscription.py
 _webhook.json
 .env
+webhook_renewal/
 emails.json
 emails_structured_output.json
 yougotmail.egg-info
-
 
 *.pyc
 *.egg-info/
@@ -17,4 +18,3 @@ build/
 _DS_Store
 _deploy.txt
 .pylintrc
-

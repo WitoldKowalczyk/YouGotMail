@@ -1,33 +1,33 @@
-# You've Got Mail
+![cover_image](public/cover_image.png)
 
-## TL;DR 📝
+# You've Got Mail - digital co-workers in MS Outlook
 
-### What 🤖
-- 🤖 easy-to-use SDK for retrieving and sending emails with MS Outlook's API
-- 🤖 AI tools to automate tasks in your MS Outlookinbox
+## 📝 TL;DR 
+
+### 🤖 What 
+- 🤖 easy-to-use library for retrieving and sending emails with MS Outlook's API
+- 📨 easily build digital co-workers: turn an email address into an AI Agent that can perform tasks for you and your company
+- 🤖 AI tools to automate tasks in your MS Outlook inbox
 - 🛠️ Personal Email Assistant: full AI Agent that lives in your inbox and does work for you
-- 📨 AI co-worker: turn an email address into an AI Agent that can perform tasks for you
 
-### Stack 📦
+### 📦 Stack 
 - 🐍 Python
 - 🧠 OpenAI
 - 📧 MS Outlook API
 - 🗄️ MongoDB
 - ☁️ AWS
 
-### Why 🤔
+### 🤔 Why 
 - 📬 over 1/3rd of every job is email-based
 - 🤖 automating work means automating emails
 - ✨ AI + Email = 🔥
 
-### Note on version and next steps
-- **status**: all methods listed below *should* be working, however I haven't had time to unit test them and write proper error handling. The docs below outline what has been tested and not. I will be updating the version and status over the summer
-- **current version**: 0.0.4
-- **last update**: 2025-07-02
+### *Note on version and tested/untested features*
+- *status: all methods listed below are (or should be) working. However I haven't had time to unit test them and write proper error handling. The docs below outline which methods have been tested and which haven't. I will be updating the version and status over the upcoming weeks*
+- *current version: 0.0.5*
+- *last update: 2025-07-05*
 
-![cover_image](public/cover_image.png)
-
-## Quickstart
+## 🚀 Quickstart 
 
 You will first need to set-up MS email credentials for your inbox. See [Getting MS credentials and setting up your inbox](#getting-ms-credentials-and-setting-up-your-inbox) for instructions. If you have those credentials, you can run the code below.
 
@@ -180,6 +180,12 @@ You can now run the Quickstart code by passing your credentials to the YouGotMai
 ## Quickstart #2: Structured Outputs from emails with OpenAI
 
 You can pass your OpenAI API key to the YouGotMail class and call the `ai_get_emails_with_structured_output()` method to retrieve emails from MS Outlook and have OpenAI structured output from the email body. You will need to pass a schema of the info you want extracted from the email body.
+
+The AI features rely on OpenAI. The OpenAI SDK is listed in dependencies as optional. In order to run ygm with OpenAI you will need to install it first:
+
+```bash
+pip install yougotmail[openai]
+```
 
 ```python
 from yougotmail import YouGotMail

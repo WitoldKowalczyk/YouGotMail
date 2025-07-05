@@ -14,34 +14,24 @@ class Quick:
         aws_secret_access_key="",
         region_name="",
         bucket_name="",
-        email_collection="emails",
-        conversation_collection="conversations",
-        attachment_collection="attachments",
+        email_collection="",
+        conversation_collection="",
+        attachment_collection="",
     ):
-        self.send = Send(
-            client_id,
-            client_secret,
-            tenant_id,
-            mongo_url,
-            mongo_db_name,
-            aws_access_key_id,
-            aws_secret_access_key,
-            region_name,
-            bucket_name,
-        )
+        self.send = Send(client_id, client_secret, tenant_id)
         self.retrieve = RetrieveEmails(
             client_id,
             client_secret,
             tenant_id,
-            mongo_url,
-            mongo_db_name,
-            aws_access_key_id,
-            aws_secret_access_key,
-            region_name,
-            bucket_name,
-            email_collection,
-            conversation_collection,
-            attachment_collection,
+            mongo_url=mongo_url,
+            mongo_db_name=mongo_db_name,
+            email_collection=email_collection,
+            conversation_collection=conversation_collection,
+            attachment_collection=attachment_collection,
+            aws_access_key_id=aws_access_key_id,
+            aws_secret_access_key=aws_secret_access_key,
+            region_name=region_name,
+            bucket_name=bucket_name,
         )
 
     # Quick action functions for simplified usage

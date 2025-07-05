@@ -16,13 +16,13 @@ class RetrieveConversations:
         tenant_id,
         mongo_url="",
         mongo_db_name="",
+        email_collection="",
+        conversation_collection="",
+        attachment_collection="",
         aws_access_key_id="",
         aws_secret_access_key="",
         region_name="",
         bucket_name="",
-        email_collection="emails",
-        conversation_collection="conversations",
-        attachment_collection="attachments",
     ):
         self.utils = Utils()
         self.token = self.utils._generate_MS_graph_token(
@@ -34,6 +34,9 @@ class RetrieveConversations:
             tenant_id,
             mongo_url,
             mongo_db_name,
+            email_collection,
+            conversation_collection,
+            attachment_collection,
             aws_access_key_id,
             aws_secret_access_key,
             region_name,
@@ -44,31 +47,25 @@ class RetrieveConversations:
             tenant_id,
             mongo_url,
             mongo_db_name,
-            aws_access_key_id,
-            aws_secret_access_key,
-            region_name,
-        )
-        self.mongo_db_storage = Storage(
-            mongo_url,
-            mongo_db_name,
-            aws_access_key_id,
-            aws_secret_access_key,
-            region_name,
-            bucket_name,
             email_collection,
             conversation_collection,
             attachment_collection,
-        )
-        self.retrieval_utils = RetrievalUtils(
-            client_id,
-            client_secret,
-            tenant_id,
-            mongo_url,
-            mongo_db_name,
             aws_access_key_id,
             aws_secret_access_key,
             region_name,
         )
+        self.db_storage = Storage(
+            mongo_url=mongo_url,
+            mongo_db_name=mongo_db_name,
+            email_collection=email_collection,
+            conversation_collection=conversation_collection,
+            attachment_collection=attachment_collection,
+            aws_access_key_id=aws_access_key_id,
+            aws_secret_access_key=aws_secret_access_key,
+            region_name=region_name,
+            bucket_name=bucket_name,
+        )
+        self.retrieval_utils = RetrievalUtils(client_id, client_secret, tenant_id)
 
     def get_conversation(
         self,
@@ -307,14 +304,12 @@ class RetrieveConversations:
             }
 
             if storage == "emails":
-                self.mongo_db_storage.store_conversation(conversation_object)
+                self.db_storage.store_conversation(conversation_object)
                 conversation_object = self.utils._convert_datetimes(
                     self.utils._remove_objectid_from_list(conversation_object)
                 )
             elif storage == "emails_and_attachments":
-                self.mongo_db_storage.store_conversation_and_attachments(
-                    conversation_object
-                )
+                self.db_storage.store_conversation_and_attachments(conversation_object)
                 conversation_object = self.utils._convert_datetimes(
                     self.utils._remove_objectid_from_list(conversation_object)
                 )

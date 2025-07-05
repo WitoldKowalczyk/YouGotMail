@@ -1,42 +1,16 @@
 import requests
 import base64
 from yougotmail._utils._utils import Utils
-from yougotmail.storage.storage import Storage
 import os
 import json
 from urllib.parse import urlparse, unquote
 
 
 class Send:
-    def __init__(
-        self,
-        client_id,
-        client_secret,
-        tenant_id,
-        mongo_url="",
-        mongo_db_name="",
-        aws_access_key_id="",
-        aws_secret_access_key="",
-        region_name="",
-        bucket_name="",
-        email_collection="emails",
-        conversation_collection="conversations",
-        attachment_collection="attachments",
-    ):
+    def __init__(self, client_id, client_secret, tenant_id):
         self.utils = Utils()
         self.token = self.utils._generate_MS_graph_token(
             client_id, client_secret, tenant_id
-        )
-        self.storage = Storage(
-            mongo_url,
-            mongo_db_name,
-            aws_access_key_id,
-            aws_secret_access_key,
-            region_name,
-            bucket_name,
-            email_collection,
-            conversation_collection,
-            attachment_collection,
         )
 
     def draft_email(

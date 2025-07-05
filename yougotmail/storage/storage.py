@@ -9,26 +9,47 @@ class Storage:
         self,
         mongo_url="",
         mongo_db_name="",
+        email_collection="",
+        conversation_collection="",
+        attachment_collection="",
         aws_access_key_id="",
         aws_secret_access_key="",
         region_name="",
         bucket_name="",
-        email_collection="",
-        conversation_collection="",
-        attachment_collection="",
     ):
-
-        # Only initialize if all required parameters are provided
-        if all(
+        # Check if MongoDB credentials are present
+        mongo_credentials_present = all(
             [
                 mongo_url,
                 mongo_db_name,
+                email_collection,
+                conversation_collection,
+                attachment_collection,
+            ]
+        )
+
+        # Check if AWS credentials are present
+        aws_credentials_present = all(
+            [
                 aws_access_key_id,
                 aws_secret_access_key,
                 region_name,
                 bucket_name,
             ]
+        )
+
+        # Check if we're in Lambda (only need region and bucket)
+        lambda_environment = all(
+            [
+                region_name,
+                bucket_name,
+            ]
+        )
+
+        if mongo_credentials_present and (
+            aws_credentials_present or lambda_environment
         ):
+            # Initialize MongoDB
             self.client = MongoClient(mongo_url)
             self.db = self.client.get_database(mongo_db_name)
             self.utils = Utils()
@@ -40,13 +61,18 @@ class Storage:
             )
             self.attachments_collection = self.db.get_collection(attachment_collection)
 
-            # S3 client and bucket name
-            self.s3_client = boto3.client(
-                "s3",
-                aws_access_key_id=aws_access_key_id,
-                aws_secret_access_key=aws_secret_access_key,
-                region_name=region_name,
-            )
+            # Initialize S3 client based on environment
+            if aws_credentials_present:
+                self.s3_client = boto3.client(
+                    "s3",
+                    aws_access_key_id=aws_access_key_id,
+                    aws_secret_access_key=aws_secret_access_key,
+                    region_name=region_name,
+                )
+            else:
+                # Lambda environment - use implicit credentials
+                self.s3_client = boto3.client("s3", region_name=region_name)
+
             self.attachments_bucket_name = bucket_name
             self.enabled = True
         else:

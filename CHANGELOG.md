@@ -22,4 +22,14 @@ All notable changes to this project will be documented in this file.
 - minor fixes
 - updated docs
 
+## [0.0.5] - 2025-07-05
+### Added
+- `create_microsoft_graph_webhook()` method for creating a Microsoft Graph webhook.
+- `get_active_subscriptions_for_inbox()` method for getting active subscriptions for an inbox.
+- `renew_subscriptions()` method for renewing subscriptions for an inbox.
+- `delete_subscription()` method for deleting a subscription.
+- `validate_webhook_endpoint()` method for validating a webhook endpoint.
+### Changed
+- updated docs and instructions
+- modified installation & dependency handling - basic install comes without OpenAI, AWS or MongoDB dependencies. You can use `pip install yougotmail[openai]` to install the dependencies for OpenAI, `pip install yougotmail[boto3]` to install the dependencies for AWS, or `pip install yougotmail[pymongo]` to install the dependencies for MongoDB.
 

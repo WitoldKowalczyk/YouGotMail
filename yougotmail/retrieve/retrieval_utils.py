@@ -2,39 +2,13 @@ import requests
 import datetime
 import re
 from yougotmail._utils._utils import Utils
-from yougotmail.storage.storage import Storage
 
 
 class RetrievalUtils:
-    def __init__(
-        self,
-        client_id,
-        client_secret,
-        tenant_id,
-        mongo_url="",
-        mongo_db_name="",
-        aws_access_key_id="",
-        aws_secret_access_key="",
-        region_name="",
-        bucket_name="",
-        email_collection="emails",
-        conversation_collection="conversations",
-        attachment_collection="attachments",
-    ):
+    def __init__(self, client_id, client_secret, tenant_id):
         self.utils = Utils()
         self.token = self.utils._generate_MS_graph_token(
             client_id, client_secret, tenant_id
-        )
-        self.mongo_db_storage = Storage(
-            mongo_url,
-            mongo_db_name,
-            aws_access_key_id,
-            aws_secret_access_key,
-            region_name,
-            bucket_name,
-            email_collection,
-            conversation_collection,
-            attachment_collection,
         )
 
     def _refine_dates_for_range(
@@ -365,7 +339,7 @@ class RetrievalUtils:
         else:
             if email_folder_name != "Archive":
                 return None
-        
+
         if deleted == "all":
             pass
         elif not deleted:

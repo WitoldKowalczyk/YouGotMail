@@ -5,10 +5,11 @@ from dotenv import load_dotenv
 load_dotenv()
 
 ygm = YouGotMail(
-            client_id=os.environ.get("MS_CLIENT_ID"),
-            client_secret=os.environ.get("MS_CLIENT_SECRET"),
-            tenant_id=os.environ.get("MS_TENANT_ID")
-            )
+    client_id=os.environ.get("MS_CLIENT_ID"),
+    client_secret=os.environ.get("MS_CLIENT_SECRET"),
+    tenant_id=os.environ.get("MS_TENANT_ID"),
+)
+
 
 def test_sending_emails():
     try:
@@ -20,11 +21,10 @@ def test_sending_emails():
             to_recipients=[os.environ.get("INBOX_1")],
             cc_recipients=[],
             bcc_recipients=[],
-            attachments=["https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png"],
+            attachments=[
+                "https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png"
+            ],
         )
         print(send_email)
     except Exception as e:
         print(f"Error: {e}")
-
-
-

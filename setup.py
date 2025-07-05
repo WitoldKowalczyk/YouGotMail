@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="yougotmail",
-    version="0.0.4",
+    version="0.0.5",
     description="Easily create AI Agents in MS Outlook",
     long_description=open("README.md", encoding="utf-8").read(),
     long_description_content_type="text/markdown",
@@ -13,12 +13,9 @@ setup(
     include_package_data=True,  # includes files listed in MANIFEST.in (if any)
     install_requires=[
         "requests",
-        "python-dotenv",
-        "boto3",
-        "pymongo",
-        "openai",
-        "python-dateutil"
+        "python-dateutil",
     ],
+    extras_require={"openai": ["openai"], "boto3": ["boto3"], "pymongo": ["pymongo"]},
     classifiers=[
         "Programming Language :: Python :: 3.10",
         "License :: OSI Approved :: Apache Software License",

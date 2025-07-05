@@ -1,38 +1,15 @@
 [
     {
         "inbox": "witold@delosintelligence.com",
-        "number_of_emails_found": 7,
+        "number_of_emails_found": 12,
         "emails": [
             {
-                "email_id": "email_AAMkADY1NDgwNWVlLTg1ZjYtNDllYi1hNGVkLTA0OWRmYzZiOGY2MQBGAAAAAAA9dNSTwf-IQbukfBBmd-mqBwAUXw7O94BhTYzib7uH34PYAAAAAAEMAAAUXw7O94BhTYzib7uH34PYAADsx8vXAAA=",
-                "received_date": "2025-06-30T06:14:48Z",
+                "email_id": "email_AAMkADY1NDgwNWVlLTg1ZjYtNDllYi1hNGVkLTA0OWRmYzZiOGY2MQBGAAAAAAA9dNSTwf-IQbukfBBmd-mqBwAUXw7O94BhTYzib7uH34PYAAAAAAEMAAAUXw7O94BhTYzib7uH34PYAADyItoFAAA=",
+                "received_date": "2025-07-05T09:02:00Z",
                 "folder_name": "Inbox",
                 "sender_name": "Witold Kowalczyk",
                 "sender_address": "witold@delosintelligence.com",
-                "conversation_id": "conversation_AAQkADY1NDgwNWVlLTg1ZjYtNDllYi1hNGVkLTA0OWRmYzZiOGY2MQAQAH7v1ckMvgBEoaDrsgfc8Rc=",
-                "recipients": [
-                    {
-                        "recipient_name": "Witold Kowalczyk",
-                        "recipient_address": "witold@delosintelligence.com"
-                    }
-                ],
-                "cc": [],
-                "bcc": [],
-                "subject": "test",
-                "body": "Test Email\r\n\r\nThis is a test email sent from YouGotMail.",
-                "attachments": [],
-                "structured_output": {
-                    "topic": "Test email notification",
-                    "sentiment": "neutral"
-                }
-            },
-            {
-                "email_id": "email_AAMkADY1NDgwNWVlLTg1ZjYtNDllYi1hNGVkLTA0OWRmYzZiOGY2MQBGAAAAAAA9dNSTwf-IQbukfBBmd-mqBwAUXw7O94BhTYzib7uH34PYAAAAAAEMAAAUXw7O94BhTYzib7uH34PYAADsx8vWAAA=",
-                "received_date": "2025-06-30T06:11:18Z",
-                "folder_name": "Inbox",
-                "sender_name": "Witold Kowalczyk",
-                "sender_address": "witold@delosintelligence.com",
-                "conversation_id": "conversation_AAQkADY1NDgwNWVlLTg1ZjYtNDllYi1hNGVkLTA0OWRmYzZiOGY2MQAQAAj3H-8YeY9BraGjH-wc8Mc=",
+                "conversation_id": "conversation_AAQkADY1NDgwNWVlLTg1ZjYtNDllYi1hNGVkLTA0OWRmYzZiOGY2MQAQAHucJXQME8tDphvkEEzs70o=",
                 "recipients": [
                     {
                         "recipient_name": "Witold Kowalczyk",
@@ -50,12 +27,12 @@
                 }
             },
             {
-                "email_id": "email_AAMkADY1NDgwNWVlLTg1ZjYtNDllYi1hNGVkLTA0OWRmYzZiOGY2MQBGAAAAAAA9dNSTwf-IQbukfBBmd-mqBwAUXw7O94BhTYzib7uH34PYAAAAAAEMAAAUXw7O94BhTYzib7uH34PYAADsx8vVAAA=",
-                "received_date": "2025-06-30T05:30:47Z",
+                "email_id": "email_AAMkADY1NDgwNWVlLTg1ZjYtNDllYi1hNGVkLTA0OWRmYzZiOGY2MQBGAAAAAAA9dNSTwf-IQbukfBBmd-mqBwAUXw7O94BhTYzib7uH34PYAAAAAAEMAAAUXw7O94BhTYzib7uH34PYAADyItoEAAA=",
+                "received_date": "2025-07-05T09:00:27Z",
                 "folder_name": "Inbox",
                 "sender_name": "Witold Kowalczyk",
                 "sender_address": "witold@delosintelligence.com",
-                "conversation_id": "conversation_AAQkADY1NDgwNWVlLTg1ZjYtNDllYi1hNGVkLTA0OWRmYzZiOGY2MQAQACtJUeQnMv5MhUNzU1B3y-Y=",
+                "conversation_id": "conversation_AAQkADY1NDgwNWVlLTg1ZjYtNDllYi1hNGVkLTA0OWRmYzZiOGY2MQAQAGwwkG2oSb1DrpmsSVlnBrM=",
                 "recipients": [
                     {
                         "recipient_name": "Witold Kowalczyk",
@@ -68,21 +45,21 @@
                 ],
                 "cc": [],
                 "bcc": [],
-                "subject": "RCNG Route Creation for QU_3899",
-                "body": "RCNG Route Creation Message for QU_3899: Route created successfully: 6051960414 for Maas-Channel Island Dairy [MAA-PAC-20] to Maas-Calgren Injection Site. Route generated in Samsara: {'data': {'id': '6051960414', 'vehicle': {'id': '281474992436309', 'name': 'QU 3899', 'externalIds': {'samsara.serial': 'G9W7X93NBT', 'samsara.vin': '1P9CC4127NB343899'}}, 'name': 'AI Route: QU_3899 - from Maas-Channel Island Dairy [MAA-PAC-20] to Maas-Calgren Injection Site', 'settings': {'routeStartingCondition': 'departFirstStop', 'routeCompletionCondition': 'departLastStop'}, 'stops': [{'id': '6328680494', 'scheduledDepartureTime': '2025-06-30T09:30:35.966Z', 'notes': '', 'address': {'id': '20036420', 'name': 'Maas-Channel Island Dairy [MAA-PAC-20]'}, 'name': 'Maas-Channel Island Dairy [MAA-PAC-20]', 'state': 'scheduled', 'liveSharingUrl': 'https://cloud.samsara.com/o/63492/fleet/viewer/job/4ca5kTzMbHKIFCM1Lt4Z', 'ontimeWindowBeforeArrivalMs': 14400000, 'ontimeWindowAfterArrivalMs': 172800000}, {'id': '6328680495', 'scheduledDepartureTime': '2025-07-04T05:30:35.966Z', 'scheduledArrivalTime': '2025-06-30T11:30:35.966Z', 'notes': '', 'address': {'id': '20036545', 'name': 'Maas-Calgren Injection Site'}, 'name': 'Maas-Calgren Injection Site', 'state': 'scheduled', 'liveSharingUrl': 'https://cloud.samsara.com/o/63492/fleet/viewer/job/EVGYK1fT5dSMRgugxIEp', 'ontimeWindowBeforeArrivalMs': 14400000, 'ontimeWindowAfterArrivalMs': 172800000}], 'scheduledRouteStartTime': '2025-06-30T09:30:35.966Z', 'scheduledRouteEndTime': '2025-07-04T05:30:35.966Z', 'orgLocalTimezone': 'America/Chicago'}, 'id': '6051960414', 'status': 'open', 'project_code': 'MAA-PAC-20', 'asset_name': 'QU_3899', '_id': ObjectId('686220fe71e9ecf251a87b3a')}",
+                "subject": "RCNG Route Creation for QU_3038",
+                "body": "RCNG Route Creation Message for QU_3038: Route created successfully: 6053243407 for Maas-Channel Island Dairy [MAA-PAC-20] to Maas-Calgren Injection Site. Route generated in Samsara: {'data': {'id': '6053243407', 'vehicle': {'id': '281474977620097', 'name': 'QU 3038', 'externalIds': {'samsara.serial': 'G4PCRGEE5M'}}, 'name': 'AI Route: QU_3038 - from Maas-Channel Island Dairy [MAA-PAC-20] to Maas-Calgren Injection Site', 'settings': {'routeStartingCondition': 'departFirstStop', 'routeCompletionCondition': 'departLastStop'}, 'stops': [{'id': '6336458882', 'scheduledDepartureTime': '2025-07-05T13:00:17.683Z', 'notes': '', 'address': {'id': '20036420', 'name': 'Maas-Channel Island Dairy [MAA-PAC-20]'}, 'name': 'Maas-Channel Island Dairy [MAA-PAC-20]', 'state': 'scheduled', 'liveSharingUrl': 'https://cloud.samsara.com/o/63492/fleet/viewer/job/lHYM4UT0kk265YRs8U1p', 'ontimeWindowBeforeArrivalMs': 14400000, 'ontimeWindowAfterArrivalMs': 172800000}, {'id': '6336458883', 'scheduledDepartureTime': '2025-07-09T09:00:17.683Z', 'scheduledArrivalTime': '2025-07-05T15:00:17.683Z', 'notes': '', 'address': {'id': '20036545', 'name': 'Maas-Calgren Injection Site'}, 'name': 'Maas-Calgren Injection Site', 'state': 'scheduled', 'liveSharingUrl': 'https://cloud.samsara.com/o/63492/fleet/viewer/job/n273TYqiumx3kA3idBJ3', 'ontimeWindowBeforeArrivalMs': 14400000, 'ontimeWindowAfterArrivalMs': 172800000}], 'scheduledRouteStartTime': '2025-07-05T13:00:17.683Z', 'scheduledRouteEndTime': '2025-07-09T09:00:17.683Z', 'orgLocalTimezone': 'America/Chicago'}, 'id': '6053243407', 'status': 'open', 'project_code': 'MAA-PAC-20', 'asset_name': 'QU_3038', '_id': ObjectId('6868e9a557939a351c8d2e24')}",
                 "attachments": [],
                 "structured_output": {
-                    "topic": "Route creation notification for vehicle QU_3899",
-                    "sentiment": "neutral and informative"
+                    "topic": "Route creation notification for vehicle QU_3038",
+                    "sentiment": "Positive and informative; the sender is notifying about a successful route creation."
                 }
             },
             {
-                "email_id": "email_AAMkADY1NDgwNWVlLTg1ZjYtNDllYi1hNGVkLTA0OWRmYzZiOGY2MQBGAAAAAAA9dNSTwf-IQbukfBBmd-mqBwAUXw7O94BhTYzib7uH34PYAAAAAAEMAAAUXw7O94BhTYzib7uH34PYAADsx8vUAAA=",
-                "received_date": "2025-06-30T05:28:27Z",
+                "email_id": "email_AAMkADY1NDgwNWVlLTg1ZjYtNDllYi1hNGVkLTA0OWRmYzZiOGY2MQBGAAAAAAA9dNSTwf-IQbukfBBmd-mqBwAUXw7O94BhTYzib7uH34PYAAAAAAEMAAAUXw7O94BhTYzib7uH34PYAADyItoDAAA=",
+                "received_date": "2025-07-05T08:48:27Z",
                 "folder_name": "Inbox",
                 "sender_name": "oncall@sapphirenatgas.grafana.net",
                 "sender_address": "oncall@sapphirenatgas.grafana.net",
-                "conversation_id": "conversation_AAQkADY1NDgwNWVlLTg1ZjYtNDllYi1hNGVkLTA0OWRmYzZiOGY2MQAQANrB8jMpkv9GkzrrOZtMv2g=",
+                "conversation_id": "conversation_AAQkADY1NDgwNWVlLTg1ZjYtNDllYi1hNGVkLTA0OWRmYzZiOGY2MQAQAMc-8uvmMvZGteT-2PGGvB0=",
                 "recipients": [
                     {
                         "recipient_name": "Witold Kowalczyk",
@@ -91,52 +68,21 @@
                 ],
                 "cc": [],
                 "bcc": [],
-                "subject": "RCNG Trailer Pressure High Threshold (warning, QU_3899, RNG)",
-                "body": "Most Recent Firing Asset Details:\r\n\r\nAsset Name: QU_3899\r\nStatus: firing \ud83d\udd25\r\nStarts At: 2025-06-30T05:27:40Z\r\n\r\nSensor Name: trailer_pressure\r\nCurrent Value (B): N/A\r\nValue String: [ var='B' labels={asset_name=QU_3899, sensor_name=trailer_pressure} value=2979.03515625 ], [ var='C' labels={asset_name=QU_3899, sensor_name=trailer_pressure} value=1 ]\r\n\r\nView Alert Rule: Link<https://sapphirenatgas.grafana.net/alerting/grafana/belsi27byicxsa/view?orgId=1>\r\nSilence Alert: Link<https://sapphirenatgas.grafana.net/alerting/silence/new?alertmanager=grafana&matcher=__alert_rule_uid__%3Dbelsi27byicxsa&matcher=asset_name%3DQU_3899&matcher=sensor_name%3Dtrailer_pressure&matcher=severity%3Dwarning&orgId=1>\r\n\r\n________________________________\r\n\r\nSummary of All Alerts in this Notification:\r\nStatus: firing \ud83d\udd25\r\nTotal Alerts: 1\r\nFiring alerts: 1\r\nResolved alerts: 0\r\n\r\nGroupLabels:\r\n\r\n  *   severity: warning\r\n  *   alertname: RCNG Trailer Pressure High Threshold\r\n  *   asset_name: QU_3899\r\n  *   grafana_folder: RNG\r\n\r\nCommonLabels:\r\n\r\n  *   severity: warning\r\n  *   alertname: RCNG Trailer Pressure High Threshold\r\n  *   asset_name: QU_3899\r\n  *   sensor_name: trailer_pressure\r\n  *   grafana_folder: RNG\r\n\r\nView in AlertManager<https://sapphirenatgas.grafana.net/alerting/list?alertState=firing&dataSource=grafana&groupBy=grafana_folder&ruleFilter=RCNG%20Trailer%20Pressure%20High%20Threshold>\r\n\r\n________________________________\r\nAlert Group #1035<https://sapphirenatgas.grafana.net/a/grafana-irm-app/alert-groups/IJNRRX1YGG56J> from RCNG - Grafana Alerting | https://sapphirenatgas.grafana.net | Docs<https://grafana.com/docs/oncall/latest/>\r\n\r\n- Your Grafana OnCall<https://grafana.com/products/cloud/oncall/>\r\n\r\n05:28.206467 UTC",
+                "subject": "RCNG Trailer Pressure High Threshold (warning, QU_3038, RNG)",
+                "body": "Most Recent Firing Asset Details:\r\n\r\nAsset Name: QU_3038\r\nStatus: firing \ud83d\udd25\r\nStarts At: 2025-07-05T08:47:40Z\r\n\r\nSensor Name: trailer_pressure\r\nCurrent Value (B): N/A\r\nValue String: [ var='B' labels={asset_name=QU_3038, sensor_name=trailer_pressure} value=3188.9697265625 ], [ var='C' labels={asset_name=QU_3038, sensor_name=trailer_pressure} value=1 ]\r\n\r\nView Alert Rule: Link<https://sapphirenatgas.grafana.net/alerting/grafana/belsi27byicxsa/view?orgId=1>\r\nSilence Alert: Link<https://sapphirenatgas.grafana.net/alerting/silence/new?alertmanager=grafana&matcher=__alert_rule_uid__%3Dbelsi27byicxsa&matcher=asset_name%3DQU_3038&matcher=sensor_name%3Dtrailer_pressure&matcher=severity%3Dwarning&orgId=1>\r\n\r\n________________________________\r\n\r\nSummary of All Alerts in this Notification:\r\nStatus: firing \ud83d\udd25\r\nTotal Alerts: 1\r\nFiring alerts: 1\r\nResolved alerts: 0\r\n\r\nGroupLabels:\r\n\r\n  *   severity: warning\r\n  *   alertname: RCNG Trailer Pressure High Threshold\r\n  *   asset_name: QU_3038\r\n  *   grafana_folder: RNG\r\n\r\nCommonLabels:\r\n\r\n  *   severity: warning\r\n  *   alertname: RCNG Trailer Pressure High Threshold\r\n  *   asset_name: QU_3038\r\n  *   sensor_name: trailer_pressure\r\n  *   grafana_folder: RNG\r\n\r\nView in AlertManager<https://sapphirenatgas.grafana.net/alerting/list?alertState=firing&dataSource=grafana&groupBy=grafana_folder&ruleFilter=RCNG%20Trailer%20Pressure%20High%20Threshold>\r\n\r\n________________________________\r\nAlert Group #1082<https://sapphirenatgas.grafana.net/a/grafana-irm-app/alert-groups/IFD3XG5M692TH> from RCNG - Grafana Alerting | https://sapphirenatgas.grafana.net | Docs<https://grafana.com/docs/oncall/latest/>\r\n\r\n- Your Grafana OnCall<https://grafana.com/products/cloud/oncall/>\r\n\r\n08:48.132610 UTC",
                 "attachments": [],
                 "structured_output": {
-                    "topic": "RCNG Trailer Pressure High Threshold alert for asset QU_3899",
+                    "topic": "RCNG Trailer Pressure High Threshold alert for asset QU_3038",
                     "sentiment": "urgent and technical"
                 }
             },
             {
-                "email_id": "email_AAMkADY1NDgwNWVlLTg1ZjYtNDllYi1hNGVkLTA0OWRmYzZiOGY2MQBGAAAAAAA9dNSTwf-IQbukfBBmd-mqBwAUXw7O94BhTYzib7uH34PYAAAAAAEMAAAUXw7O94BhTYzib7uH34PYAADsx8vSAAA=",
-                "received_date": "2025-06-30T03:56:27Z",
-                "folder_name": "Inbox",
-                "sender_name": "Delos AI Inc.",
-                "sender_address": "noreply@email.delosintelligence.com",
-                "conversation_id": "conversation_AAQkADY1NDgwNWVlLTg1ZjYtNDllYi1hNGVkLTA0OWRmYzZiOGY2MQAQAC1WlJ_SODFNvL-ic5CTi5s=",
-                "recipients": [
-                    {
-                        "recipient_name": "Witold Kowalczyk",
-                        "recipient_address": "witold@delosintelligence.com"
-                    },
-                    {
-                        "recipient_name": "Pawe\u0142  Landowski",
-                        "recipient_address": "pawel@delosintelligence.com"
-                    },
-                    {
-                        "recipient_name": "Stanis\u0142aw S\u00f3jka",
-                        "recipient_address": "stan@delosintelligence.com"
-                    }
-                ],
-                "cc": [],
-                "bcc": [],
-                "subject": "MongoDB Data Backup Migration",
-                "body": "Collection: threads\r\n\r\n- copied into dev collections\r\n\r\n- copied into backup collections\r\n\r\nCollection: thread_items\r\n\r\n- copied into dev collections\r\n\r\n- copied into backup collections\r\n\r\nCollection: L23_agreements\r\n\r\n- copied into dev collections\r\n\r\n- copied into backup collections\r\n\r\nCollection: agents\r\n\r\n- copied into dev collections\r\n\r\n- copied into backup collections\r\n\r\nCollection: agreements\r\n\r\n- copied into dev collections\r\n\r\n- copied into backup collections\r\n\r\nCollection: data\r\n\r\n- copied into dev collections\r\n\r\n- copied into backup collections\r\n\r\nCollection: events\r\n\r\n- copied into dev collections\r\n\r\n- copied into backup collections\r\n\r\nCollection: ledger\r\n\r\n- copied into dev collections\r\n\r\n- copied into backup collections\r\n\r\nCollection: organizations\r\n\r\n- copied into dev collections\r\n\r\n- copied into backup collections\r\n\r\nCollection: users\r\n\r\n- copied into dev collections\r\n\r\n- copied into backup collections\r\n\r\nCollection: document_pool\r\n\r\n- copied into dev collections\r\n\r\n- copied into backup collections\r\n\r\nCollection: agreements_processing is empty. Skipping backup.\r\nCollection: canvas_chats\r\n\r\n- copied into dev collections\r\n\r\n- copied into backup collections\r\n\r\nCollection: canvas_messages\r\n\r\n- copied into dev collections\r\n\r\n- copied into backup collections\r\n\r\nCollection: chats\r\n\r\n- copied into dev collections\r\n\r\n- copied into backup collections\r\n\r\nCollection: chat_documents\r\n\r\n- copied into dev collections\r\n\r\n- copied into backup collections\r\n\r\nCollection: messages\r\n\r\n- copied into dev collections\r\n\r\n- copied into backup collections\r\n\r\nCollection: suggestions is empty. Skipping backup.\r\nCollection: votes is empty. Skipping backup.\r\nCollection: existing_documents\r\n\r\n- copied into dev collections\r\n\r\n- copied into backup collections\r\n\r\nCollection: l2_extraction_schemas\r\n\r\n- copied into dev collections\r\n\r\n- copied into backup collections\r\n\r\nCollection: l2_extraction_categories\r\n\r\n- copied into dev collections\r\n\r\n- copied into backup collections\r\n\r\nCollection: clearinghouse_tokens\r\n\r\n- copied into dev collections\r\n\r\n- copied into backup collections\r\n\r\nCollection: events\r\n\r\n- copied into dev collections\r\n\r\n- copied into backup collections\r\n\r\nCollection: agreements\r\n\r\n- copied into dev collections\r\n\r\n- copied into backup collections\r\n\r\nCollection: ledger\r\n\r\n- copied into dev collections\r\n\r\n- copied into backup collections\r\n\r\nCollection: suppliers\r\n\r\n- copied into dev collections\r\n\r\n- copied into backup collections\r\n\r\nCollection: monthly_leases\r\n\r\n- copied into dev collections\r\n\r\n- copied into backup collections",
-                "attachments": [],
-                "structured_output": {
-                    "topic": "Database collections backup and copy status update",
-                    "sentiment": "neutral and factual"
-                }
-            },
-            {
-                "email_id": "email_AAMkADY1NDgwNWVlLTg1ZjYtNDllYi1hNGVkLTA0OWRmYzZiOGY2MQBGAAAAAAA9dNSTwf-IQbukfBBmd-mqBwAUXw7O94BhTYzib7uH34PYAAAAAAEMAAAUXw7O94BhTYzib7uH34PYAADsx8vRAAA=",
-                "received_date": "2025-06-30T03:33:27Z",
+                "email_id": "email_AAMkADY1NDgwNWVlLTg1ZjYtNDllYi1hNGVkLTA0OWRmYzZiOGY2MQBGAAAAAAA9dNSTwf-IQbukfBBmd-mqBwAUXw7O94BhTYzib7uH34PYAAAAAAEMAAAUXw7O94BhTYzib7uH34PYAADyItoCAAA=",
+                "received_date": "2025-07-05T08:38:26Z",
                 "folder_name": "Inbox",
                 "sender_name": "oncall@sapphirenatgas.grafana.net",
                 "sender_address": "oncall@sapphirenatgas.grafana.net",
-                "conversation_id": "conversation_AAQkADY1NDgwNWVlLTg1ZjYtNDllYi1hNGVkLTA0OWRmYzZiOGY2MQAQADkmEX3qJbpCnEAWLIW25mk=",
+                "conversation_id": "conversation_AAQkADY1NDgwNWVlLTg1ZjYtNDllYi1hNGVkLTA0OWRmYzZiOGY2MQAQANs-G-pudflCgu3qnB302YU=",
                 "recipients": [
                     {
                         "recipient_name": "Witold Kowalczyk",
@@ -145,35 +91,212 @@
                 ],
                 "cc": [],
                 "bcc": [],
-                "subject": "RCNG Trailer Pressure High Threshold (warning, QU_3899, RNG)",
-                "body": "Most Recent Firing Asset Details:\r\n\r\nAsset Name: QU_3899\r\nStatus: firing \ud83d\udd25\r\nStarts At: 2025-06-30T03:32:40Z\r\n\r\nSensor Name: trailer_pressure\r\nCurrent Value (B): N/A\r\nValue String: [ var='B' labels={asset_name=QU_3899, sensor_name=trailer_pressure} value=3062.58056640625 ], [ var='C' labels={asset_name=QU_3899, sensor_name=trailer_pressure} value=1 ]\r\n\r\nView Alert Rule: Link<https://sapphirenatgas.grafana.net/alerting/grafana/belsi27byicxsa/view?orgId=1>\r\nSilence Alert: Link<https://sapphirenatgas.grafana.net/alerting/silence/new?alertmanager=grafana&matcher=__alert_rule_uid__%3Dbelsi27byicxsa&matcher=asset_name%3DQU_3899&matcher=sensor_name%3Dtrailer_pressure&matcher=severity%3Dwarning&orgId=1>\r\n\r\n________________________________\r\n\r\nSummary of All Alerts in this Notification:\r\nStatus: firing \ud83d\udd25\r\nTotal Alerts: 1\r\nFiring alerts: 1\r\nResolved alerts: 0\r\n\r\nGroupLabels:\r\n\r\n  *   severity: warning\r\n  *   alertname: RCNG Trailer Pressure High Threshold\r\n  *   asset_name: QU_3899\r\n  *   grafana_folder: RNG\r\n\r\nCommonLabels:\r\n\r\n  *   severity: warning\r\n  *   alertname: RCNG Trailer Pressure High Threshold\r\n  *   asset_name: QU_3899\r\n  *   sensor_name: trailer_pressure\r\n  *   grafana_folder: RNG\r\n\r\nView in AlertManager<https://sapphirenatgas.grafana.net/alerting/list?alertState=firing&dataSource=grafana&groupBy=grafana_folder&ruleFilter=RCNG%20Trailer%20Pressure%20High%20Threshold>\r\n\r\n________________________________\r\nAlert Group #1034<https://sapphirenatgas.grafana.net/a/grafana-irm-app/alert-groups/I45BPLJ4PHVN9> from RCNG - Grafana Alerting | https://sapphirenatgas.grafana.net | Docs<https://grafana.com/docs/oncall/latest/>\r\n\r\n- Your Grafana OnCall<https://grafana.com/products/cloud/oncall/>\r\n\r\n03:33.338666 UTC",
+                "subject": "RCNG Trailer Pressure High Threshold (critical, QU_3038, RNG)",
+                "body": "Most Recent Firing Asset Details:\r\n\r\nAsset Name: QU_3038\r\nStatus: firing \ud83d\udd25\r\nStarts At: 2025-07-05T08:37:40Z\r\n\r\nSensor Name: trailer_pressure\r\nCurrent Value (B): N/A\r\nValue String: [ var='B' labels={asset_name=QU_3038, sensor_name=trailer_pressure} value=3208.6064453125 ], [ var='C' labels={asset_name=QU_3038, sensor_name=trailer_pressure} value=1 ]\r\n\r\nView Alert Rule: Link<https://sapphirenatgas.grafana.net/alerting/grafana/belsi27byicxsa/view?orgId=1>\r\nSilence Alert: Link<https://sapphirenatgas.grafana.net/alerting/silence/new?alertmanager=grafana&matcher=__alert_rule_uid__%3Dbelsi27byicxsa&matcher=asset_name%3DQU_3038&matcher=sensor_name%3Dtrailer_pressure&matcher=severity%3Dcritical&orgId=1>\r\n\r\n________________________________\r\n\r\nSummary of All Alerts in this Notification:\r\nStatus: firing \ud83d\udd25\r\nTotal Alerts: 1\r\nFiring alerts: 1\r\nResolved alerts: 0\r\n\r\nGroupLabels:\r\n\r\n  *   severity: critical\r\n  *   alertname: RCNG Trailer Pressure High Threshold\r\n  *   asset_name: QU_3038\r\n  *   grafana_folder: RNG\r\n\r\nCommonLabels:\r\n\r\n  *   severity: critical\r\n  *   alertname: RCNG Trailer Pressure High Threshold\r\n  *   asset_name: QU_3038\r\n  *   sensor_name: trailer_pressure\r\n  *   grafana_folder: RNG\r\n\r\nView in AlertManager<https://sapphirenatgas.grafana.net/alerting/list?alertState=firing&dataSource=grafana&groupBy=grafana_folder&ruleFilter=RCNG%20Trailer%20Pressure%20High%20Threshold>\r\n\r\n________________________________\r\nAlert Group #1081<https://sapphirenatgas.grafana.net/a/grafana-irm-app/alert-groups/I8FM4EG1DFN85> from RCNG - Grafana Alerting | https://sapphirenatgas.grafana.net | Docs<https://grafana.com/docs/oncall/latest/>\r\n\r\n- Your Grafana OnCall<https://grafana.com/products/cloud/oncall/>\r\n\r\n08:38.975205 UTC",
                 "attachments": [],
                 "structured_output": {
-                    "topic": "RCNG Trailer Pressure High Threshold alert for asset QU_3899",
-                    "sentiment": "urgent and informative"
+                    "topic": "Critical alert: RCNG Trailer Pressure High Threshold for asset QU_3038",
+                    "sentiment": "urgent, serious"
                 }
             },
             {
-                "email_id": "email_AAMkADY1NDgwNWVlLTg1ZjYtNDllYi1hNGVkLTA0OWRmYzZiOGY2MQBGAAAAAAA9dNSTwf-IQbukfBBmd-mqBwAUXw7O94BhTYzib7uH34PYAAAAAAEMAAAUXw7O94BhTYzib7uH34PYAADsx8vPAAA=",
-                "received_date": "2025-06-29T23:58:13Z",
+                "email_id": "email_AAMkADY1NDgwNWVlLTg1ZjYtNDllYi1hNGVkLTA0OWRmYzZiOGY2MQBGAAAAAAA9dNSTwf-IQbukfBBmd-mqBwAUXw7O94BhTYzib7uH34PYAAAAAAEMAAAUXw7O94BhTYzib7uH34PYAADyItoBAAA=",
+                "received_date": "2025-07-05T08:00:42Z",
                 "folder_name": "Inbox",
-                "sender_name": "Julius Lipp",
-                "sender_address": "julius@mixedbread.ai",
-                "conversation_id": "conversation_AAQkADY1NDgwNWVlLTg1ZjYtNDllYi1hNGVkLTA0OWRmYzZiOGY2MQAQAPgT3UcB4i9OjLEU6SHdHtQ=",
+                "sender_name": "Witold Kowalczyk",
+                "sender_address": "witold@delosintelligence.com",
+                "conversation_id": "conversation_AAQkADY1NDgwNWVlLTg1ZjYtNDllYi1hNGVkLTA0OWRmYzZiOGY2MQAQAKCEIiPaMrxKuAppR8F0ooI=",
                 "recipients": [
                     {
                         "recipient_name": "Witold Kowalczyk",
                         "recipient_address": "witold@delosintelligence.com"
+                    },
+                    {
+                        "recipient_name": "Joseph Zimowski",
+                        "recipient_address": "jzimowski@sapphirenatgas.com"
                     }
                 ],
                 "cc": [],
                 "bcc": [],
-                "subject": "Canceled: 15 Min Meeting between Julius Lipp and Witold between Julius Lipp and Witold at 9:30am - 9:45am, Monday, June 30, 2025",
-                "body": "[https://app.cal.com/emails/xCircle@2x.png]\r\nYour scheduled event was canceled\r\nWe sent an email to everyone with this information.\r\n\r\nReason for cancellation (optional)\r\n\r\nas mentioned\r\n\r\nWhat\r\n\r\n15 Min Meeting between Julius Lipp and Witold between Julius Lipp and Witold\r\n\r\nWhen\r\n\r\nMonday, June 30, 2025 | 9:30am - 9:45am (America/Los_Angeles)\r\n\r\nWho\r\n\r\nJulius Lipp - Organizer julius@mixedbread.ai<mailto:julius@mixedbread.ai>\r\nWitold - Guest witold@delosintelligence.com<mailto:witold@delosintelligence.com>\r\n\r\nWhere\r\n\r\nGoogle Meet\r\n\r\nAdditional notes\r\n\r\nXX fellowship interview - https://xxreview.replit.app/app/1512\r\n\r\n[https://app.cal.com/emails/logo.png]<https://app.cal.com>",
+                "subject": "RCNG Route Creation for QU_0006",
+                "body": "RCNG Route Creation Message for QU_0006: Route created successfully: 6053234013 for Maas-JDS Dairy [MAA-MER-24] to Maas-Helm Injection Site. Route generated in Samsara: {'data': {'id': '6053234013', 'vehicle': {'id': '281474992485599', 'name': 'QU 0006', 'externalIds': {'samsara.serial': 'GR7VPRFJPV', 'samsara.vin': '7XMCT4122RB000006'}}, 'name': 'AI Route: QU_0006 - from Maas-JDS Dairy [MAA-MER-24] to Maas-Helm Injection Site', 'settings': {'routeStartingCondition': 'departFirstStop', 'routeCompletionCondition': 'departLastStop'}, 'stops': [{'id': '6336402480', 'scheduledDepartureTime': '2025-07-05T12:00:34.706Z', 'notes': '', 'address': {'id': '278173629', 'name': 'Maas-JDS Dairy [MAA-MER-24]'}, 'name': 'Maas-JDS Dairy [MAA-MER-24]', 'state': 'scheduled', 'liveSharingUrl': 'https://cloud.samsara.com/o/63492/fleet/viewer/job/AlhSTJFVvA65zOSpfJuZ', 'ontimeWindowBeforeArrivalMs': 14400000, 'ontimeWindowAfterArrivalMs': 172800000}, {'id': '6336402481', 'scheduledDepartureTime': '2025-07-09T08:00:34.706Z', 'scheduledArrivalTime': '2025-07-05T14:00:34.706Z', 'notes': '', 'address': {'id': '237973367', 'name': 'Maas-Helm Injection Site'}, 'name': 'Maas-Helm Injection Site', 'state': 'scheduled', 'liveSharingUrl': 'https://cloud.samsara.com/o/63492/fleet/viewer/job/QJYocjwWvoo1b7w05jHR', 'ontimeWindowBeforeArrivalMs': 14400000, 'ontimeWindowAfterArrivalMs': 172800000}], 'scheduledRouteStartTime': '2025-07-05T12:00:34.706Z', 'scheduledRouteEndTime': '2025-07-09T08:00:34.706Z', 'orgLocalTimezone': 'America/Chicago'}, 'id': '6053234013', 'status': 'open', 'project_code': 'MAA-MER-24-001314', 'asset_name': 'QU_0006', '_id': ObjectId('6868dba5f3f56ab755796f74')}",
                 "attachments": [],
                 "structured_output": {
-                    "topic": "Cancellation of scheduled meeting",
-                    "sentiment": "Neutral and informative; the sender is simply notifying recipients about the cancellation of a scheduled event."
+                    "topic": "Route creation notification for vehicle QU_0006",
+                    "sentiment": "neutral and informative"
+                }
+            },
+            {
+                "email_id": "email_AAMkADY1NDgwNWVlLTg1ZjYtNDllYi1hNGVkLTA0OWRmYzZiOGY2MQBGAAAAAAA9dNSTwf-IQbukfBBmd-mqBwAUXw7O94BhTYzib7uH34PYAAAAAAEMAAAUXw7O94BhTYzib7uH34PYAADyItoAAAA=",
+                "received_date": "2025-07-05T07:33:25Z",
+                "folder_name": "Inbox",
+                "sender_name": "oncall@sapphirenatgas.grafana.net",
+                "sender_address": "oncall@sapphirenatgas.grafana.net",
+                "conversation_id": "conversation_AAQkADY1NDgwNWVlLTg1ZjYtNDllYi1hNGVkLTA0OWRmYzZiOGY2MQAQALTeyF5V9fdDuMXhM9y9yiQ=",
+                "recipients": [
+                    {
+                        "recipient_name": "Witold Kowalczyk",
+                        "recipient_address": "sapphireai@delosintelligence.com"
+                    }
+                ],
+                "cc": [],
+                "bcc": [],
+                "subject": "RCNG Trailer Pressure High Threshold (warning, QU_0006, RNG)",
+                "body": "Most Recent Firing Asset Details:\r\n\r\nAsset Name: QU_0006\r\nStatus: firing \ud83d\udd25\r\nStarts At: 2025-07-05T07:32:40Z\r\n\r\nSensor Name: trailer_pressure\r\nCurrent Value (B): N/A\r\nValue String: [ var='B' labels={asset_name=QU_0006, sensor_name=trailer_pressure} value=2924.05224609375 ], [ var='C' labels={asset_name=QU_0006, sensor_name=trailer_pressure} value=1 ]\r\n\r\nView Alert Rule: Link<https://sapphirenatgas.grafana.net/alerting/grafana/belsi27byicxsa/view?orgId=1>\r\nSilence Alert: Link<https://sapphirenatgas.grafana.net/alerting/silence/new?alertmanager=grafana&matcher=__alert_rule_uid__%3Dbelsi27byicxsa&matcher=asset_name%3DQU_0006&matcher=sensor_name%3Dtrailer_pressure&matcher=severity%3Dwarning&orgId=1>\r\n\r\n________________________________\r\n\r\nSummary of All Alerts in this Notification:\r\nStatus: firing \ud83d\udd25\r\nTotal Alerts: 1\r\nFiring alerts: 1\r\nResolved alerts: 0\r\n\r\nGroupLabels:\r\n\r\n  *   severity: warning\r\n  *   alertname: RCNG Trailer Pressure High Threshold\r\n  *   asset_name: QU_0006\r\n  *   grafana_folder: RNG\r\n\r\nCommonLabels:\r\n\r\n  *   severity: warning\r\n  *   alertname: RCNG Trailer Pressure High Threshold\r\n  *   asset_name: QU_0006\r\n  *   sensor_name: trailer_pressure\r\n  *   grafana_folder: RNG\r\n\r\nView in AlertManager<https://sapphirenatgas.grafana.net/alerting/list?alertState=firing&dataSource=grafana&groupBy=grafana_folder&ruleFilter=RCNG%20Trailer%20Pressure%20High%20Threshold>\r\n\r\n________________________________\r\nAlert Group #1080<https://sapphirenatgas.grafana.net/a/grafana-irm-app/alert-groups/IZ3QAPNPJIQAA> from RCNG - Grafana Alerting | https://sapphirenatgas.grafana.net | Docs<https://grafana.com/docs/oncall/latest/>\r\n\r\n- Your Grafana OnCall<https://grafana.com/products/cloud/oncall/>\r\n\r\n07:33.907375 UTC",
+                "attachments": [],
+                "structured_output": {
+                    "topic": "RCNG Trailer Pressure High Threshold Alert for Asset QU_0006",
+                    "sentiment": "urgent and technical"
+                }
+            },
+            {
+                "email_id": "email_AAMkADY1NDgwNWVlLTg1ZjYtNDllYi1hNGVkLTA0OWRmYzZiOGY2MQBGAAAAAAA9dNSTwf-IQbukfBBmd-mqBwAUXw7O94BhTYzib7uH34PYAADCjGUOAAAUXw7O94BhTYzib7uH34PYAADyIw3CAAA=",
+                "received_date": "2025-07-05T06:30:45Z",
+                "folder_name": "AC_RNG",
+                "sender_name": "Witold Kowalczyk",
+                "sender_address": "witold@delosintelligence.com",
+                "conversation_id": "conversation_AAQkADY1NDgwNWVlLTg1ZjYtNDllYi1hNGVkLTA0OWRmYzZiOGY2MQAQAGxCJqDNfeROj1oH9awDhtw=",
+                "recipients": [
+                    {
+                        "recipient_name": "Witold Kowalczyk",
+                        "recipient_address": "witold@delosintelligence.com"
+                    },
+                    {
+                        "recipient_name": "Joseph Zimowski",
+                        "recipient_address": "jzimowski@sapphirenatgas.com"
+                    }
+                ],
+                "cc": [],
+                "bcc": [],
+                "subject": "RCNG Route Creation for QU_3038",
+                "body": "RCNG Route Creation Message for QU_3038: Route created successfully: 6053218753 for Maas-Channel Island Dairy [MAA-PAC-20] to Maas-Calgren Injection Site. Route generated in Samsara: {'data': {'id': '6053218753', 'vehicle': {'id': '281474977620097', 'name': 'QU 3038', 'externalIds': {'samsara.serial': 'G4PCRGEE5M'}}, 'name': 'AI Route: QU_3038 - from Maas-Channel Island Dairy [MAA-PAC-20] to Maas-Calgren Injection Site', 'externalIds': {'projectCode': 'MAA-PAC-20', 'sapphireId': 'rcng_6053218753'}, 'settings': {'routeStartingCondition': 'departFirstStop', 'routeCompletionCondition': 'departLastStop'}, 'stops': [{'id': '6336311119', 'scheduledDepartureTime': '2025-07-05T10:30:33.210Z', 'notes': '', 'address': {'id': '20036420', 'name': 'Maas-Channel Island Dairy [MAA-PAC-20]'}, 'name': 'Maas-Channel Island Dairy [MAA-PAC-20]', 'state': 'scheduled', 'liveSharingUrl': 'https://cloud.samsara.com/o/63492/fleet/viewer/job/D9cPLbGTlODDmZ7Ag7Hc', 'ontimeWindowBeforeArrivalMs': 14400000, 'ontimeWindowAfterArrivalMs': 172800000}, {'id': '6336311121', 'scheduledDepartureTime': '2025-07-09T06:30:33.210Z', 'scheduledArrivalTime': '2025-07-05T12:30:33.210Z', 'notes': '', 'address': {'id': '20036545', 'name': 'Maas-Calgren Injection Site'}, 'name': 'Maas-Calgren Injection Site', 'state': 'scheduled', 'liveSharingUrl': 'https://cloud.samsara.com/o/63492/fleet/viewer/job/tcOBhVSdWR51zUakUI7F', 'ontimeWindowBeforeArrivalMs': 14400000, 'ontimeWindowAfterArrivalMs': 172800000}], 'scheduledRouteStartTime': '2025-07-05T10:30:33.210Z', 'scheduledRouteEndTime': '2025-07-09T06:30:33.210Z', 'orgLocalTimezone': 'America/Chicago'}, 'id': '6053218753', 'status': 'open', 'project_code': 'MAA-PAC-20', 'asset_name': 'QU_3038', '_id': ObjectId('6868c68cab4144c4dac7b686')}",
+                "attachments": [],
+                "structured_output": {
+                    "topic": "Route creation notification for vehicle QU_3038",
+                    "sentiment": "neutral and informative"
+                }
+            },
+            {
+                "email_id": "email_AAMkADY1NDgwNWVlLTg1ZjYtNDllYi1hNGVkLTA0OWRmYzZiOGY2MQBGAAAAAAA9dNSTwf-IQbukfBBmd-mqBwAUXw7O94BhTYzib7uH34PYAAAAAAEMAAAUXw7O94BhTYzib7uH34PYAADyItn_AAA=",
+                "received_date": "2025-07-05T06:23:28Z",
+                "folder_name": "Inbox",
+                "sender_name": "oncall@sapphirenatgas.grafana.net",
+                "sender_address": "oncall@sapphirenatgas.grafana.net",
+                "conversation_id": "conversation_AAQkADY1NDgwNWVlLTg1ZjYtNDllYi1hNGVkLTA0OWRmYzZiOGY2MQAQAApWFhj6EDNGhluvjnOvYgo=",
+                "recipients": [
+                    {
+                        "recipient_name": "Witold Kowalczyk",
+                        "recipient_address": "sapphireai@delosintelligence.com"
+                    }
+                ],
+                "cc": [],
+                "bcc": [],
+                "subject": "RCNG Trailer Pressure High Threshold (warning, QU_3038, RNG)",
+                "body": "Most Recent Firing Asset Details:\r\n\r\nAsset Name: QU_3038\r\nStatus: firing \ud83d\udd25\r\nStarts At: 2025-07-05T06:22:40Z\r\n\r\nSensor Name: trailer_pressure\r\nCurrent Value (B): N/A\r\nValue String: [ var='B' labels={asset_name=QU_3038, sensor_name=trailer_pressure} value=2916.5546875 ], [ var='C' labels={asset_name=QU_3038, sensor_name=trailer_pressure} value=1 ]\r\n\r\nView Alert Rule: Link<https://sapphirenatgas.grafana.net/alerting/grafana/belsi27byicxsa/view?orgId=1>\r\nSilence Alert: Link<https://sapphirenatgas.grafana.net/alerting/silence/new?alertmanager=grafana&matcher=__alert_rule_uid__%3Dbelsi27byicxsa&matcher=asset_name%3DQU_3038&matcher=sensor_name%3Dtrailer_pressure&matcher=severity%3Dwarning&orgId=1>\r\n\r\n________________________________\r\n\r\nSummary of All Alerts in this Notification:\r\nStatus: firing \ud83d\udd25\r\nTotal Alerts: 1\r\nFiring alerts: 1\r\nResolved alerts: 0\r\n\r\nGroupLabels:\r\n\r\n  *   severity: warning\r\n  *   alertname: RCNG Trailer Pressure High Threshold\r\n  *   asset_name: QU_3038\r\n  *   grafana_folder: RNG\r\n\r\nCommonLabels:\r\n\r\n  *   severity: warning\r\n  *   alertname: RCNG Trailer Pressure High Threshold\r\n  *   asset_name: QU_3038\r\n  *   sensor_name: trailer_pressure\r\n  *   grafana_folder: RNG\r\n\r\nView in AlertManager<https://sapphirenatgas.grafana.net/alerting/list?alertState=firing&dataSource=grafana&groupBy=grafana_folder&ruleFilter=RCNG%20Trailer%20Pressure%20High%20Threshold>\r\n\r\n________________________________\r\nAlert Group #1079<https://sapphirenatgas.grafana.net/a/grafana-irm-app/alert-groups/IJCIFX3R6I85J> from RCNG - Grafana Alerting | https://sapphirenatgas.grafana.net | Docs<https://grafana.com/docs/oncall/latest/>\r\n\r\n- Your Grafana OnCall<https://grafana.com/products/cloud/oncall/>\r\n\r\n06:23.878000 UTC",
+                "attachments": [],
+                "structured_output": {
+                    "topic": "RCNG Trailer Pressure High Threshold alert for asset QU_3038",
+                    "sentiment": "neutral and informative"
+                }
+            },
+            {
+                "email_id": "email_AAMkADY1NDgwNWVlLTg1ZjYtNDllYi1hNGVkLTA0OWRmYzZiOGY2MQBGAAAAAAA9dNSTwf-IQbukfBBmd-mqBwAUXw7O94BhTYzib7uH34PYAADCjGUOAAAUXw7O94BhTYzib7uH34PYAADyIw3AAAA=",
+                "received_date": "2025-07-05T03:00:23Z",
+                "folder_name": "AC_RNG",
+                "sender_name": "Witold Kowalczyk",
+                "sender_address": "witold@delosintelligence.com",
+                "conversation_id": "conversation_AAQkADY1NDgwNWVlLTg1ZjYtNDllYi1hNGVkLTA0OWRmYzZiOGY2MQAQALqOrundXExBuQgt13zbqik=",
+                "recipients": [
+                    {
+                        "recipient_name": "Witold Kowalczyk",
+                        "recipient_address": "witold@delosintelligence.com"
+                    },
+                    {
+                        "recipient_name": "Joseph Zimowski",
+                        "recipient_address": "jzimowski@sapphirenatgas.com"
+                    }
+                ],
+                "cc": [],
+                "bcc": [],
+                "subject": "RCNG Route Creation for QU_3035",
+                "body": "RCNG Route Creation Message for QU_3035: Location Maas-Calgren Injection Site does not match any dairy.",
+                "attachments": [],
+                "structured_output": {
+                    "topic": "Route Creation Error Notification",
+                    "sentiment": "neutral"
+                }
+            },
+            {
+                "email_id": "email_AAMkADY1NDgwNWVlLTg1ZjYtNDllYi1hNGVkLTA0OWRmYzZiOGY2MQBGAAAAAAA9dNSTwf-IQbukfBBmd-mqBwAUXw7O94BhTYzib7uH34PYAAAAAAEMAAAUXw7O94BhTYzib7uH34PYAADyItn7AAA=",
+                "received_date": "2025-07-05T02:48:30Z",
+                "folder_name": "Inbox",
+                "sender_name": "oncall@sapphirenatgas.grafana.net",
+                "sender_address": "oncall@sapphirenatgas.grafana.net",
+                "conversation_id": "conversation_AAQkADY1NDgwNWVlLTg1ZjYtNDllYi1hNGVkLTA0OWRmYzZiOGY2MQAQAPoCyfn4Pw5EqgpsvdKid3M=",
+                "recipients": [
+                    {
+                        "recipient_name": "Witold Kowalczyk",
+                        "recipient_address": "sapphireai@delosintelligence.com"
+                    }
+                ],
+                "cc": [],
+                "bcc": [],
+                "subject": "RCNG Trailer Pressure High Threshold (warning, QU_3035, RNG)",
+                "body": "Most Recent Firing Asset Details:\r\n\r\nAsset Name: QU_3035\r\nStatus: firing \ud83d\udd25\r\nStarts At: 2025-07-05T02:47:40Z\r\n\r\nSensor Name: trailer_pressure\r\nCurrent Value (B): N/A\r\nValue String: [ var='B' labels={asset_name=QU_3035, sensor_name=trailer_pressure} value=3111.85107421875 ], [ var='C' labels={asset_name=QU_3035, sensor_name=trailer_pressure} value=1 ]\r\n\r\nView Alert Rule: Link<https://sapphirenatgas.grafana.net/alerting/grafana/belsi27byicxsa/view?orgId=1>\r\nSilence Alert: Link<https://sapphirenatgas.grafana.net/alerting/silence/new?alertmanager=grafana&matcher=__alert_rule_uid__%3Dbelsi27byicxsa&matcher=asset_name%3DQU_3035&matcher=sensor_name%3Dtrailer_pressure&matcher=severity%3Dwarning&orgId=1>\r\n\r\n________________________________\r\n\r\nSummary of All Alerts in this Notification:\r\nStatus: firing \ud83d\udd25\r\nTotal Alerts: 1\r\nFiring alerts: 1\r\nResolved alerts: 0\r\n\r\nGroupLabels:\r\n\r\n  *   severity: warning\r\n  *   alertname: RCNG Trailer Pressure High Threshold\r\n  *   asset_name: QU_3035\r\n  *   grafana_folder: RNG\r\n\r\nCommonLabels:\r\n\r\n  *   severity: warning\r\n  *   alertname: RCNG Trailer Pressure High Threshold\r\n  *   asset_name: QU_3035\r\n  *   sensor_name: trailer_pressure\r\n  *   grafana_folder: RNG\r\n\r\nView in AlertManager<https://sapphirenatgas.grafana.net/alerting/list?alertState=firing&dataSource=grafana&groupBy=grafana_folder&ruleFilter=RCNG%20Trailer%20Pressure%20High%20Threshold>\r\n\r\n________________________________\r\nAlert Group #1078<https://sapphirenatgas.grafana.net/a/grafana-irm-app/alert-groups/ITRE1AY1KJCB2> from RCNG - Grafana Alerting | https://sapphirenatgas.grafana.net | Docs<https://grafana.com/docs/oncall/latest/>\r\n\r\n- Your Grafana OnCall<https://grafana.com/products/cloud/oncall/>\r\n\r\n02:48.011277 UTC",
+                "attachments": [],
+                "structured_output": {
+                    "topic": "RCNG Trailer Pressure High Threshold alert for asset QU_3035",
+                    "sentiment": "urgent and technical"
+                }
+            },
+            {
+                "email_id": "email_AAMkADY1NDgwNWVlLTg1ZjYtNDllYi1hNGVkLTA0OWRmYzZiOGY2MQBGAAAAAAA9dNSTwf-IQbukfBBmd-mqBwAUXw7O94BhTYzib7uH34PYAADCjGUOAAAUXw7O94BhTYzib7uH34PYAADyIw3BAAA=",
+                "received_date": "2025-07-05T01:30:40Z",
+                "folder_name": "AC_RNG",
+                "sender_name": "Witold Kowalczyk",
+                "sender_address": "witold@delosintelligence.com",
+                "conversation_id": "conversation_AAQkADY1NDgwNWVlLTg1ZjYtNDllYi1hNGVkLTA0OWRmYzZiOGY2MQAQAFXjrFWY-lpDtMZCHK-ZUu8=",
+                "recipients": [
+                    {
+                        "recipient_name": "Witold Kowalczyk",
+                        "recipient_address": "witold@delosintelligence.com"
+                    },
+                    {
+                        "recipient_name": "Joseph Zimowski",
+                        "recipient_address": "jzimowski@sapphirenatgas.com"
+                    }
+                ],
+                "cc": [],
+                "bcc": [],
+                "subject": "RCNG Route Creation for QU_9264",
+                "body": "RCNG Route Creation Message for QU_9264: Grafana Asset QU_9264 not found in Samsara. This could have been an AI generated route...",
+                "attachments": [],
+                "structured_output": {
+                    "topic": "RCNG Route Creation Message for QU_9264 - Asset Not Found",
+                    "sentiment": "neutral"
+                }
+            },
+            {
+                "email_id": "email_AAMkADY1NDgwNWVlLTg1ZjYtNDllYi1hNGVkLTA0OWRmYzZiOGY2MQBGAAAAAAA9dNSTwf-IQbukfBBmd-mqBwAUXw7O94BhTYzib7uH34PYAAAAAAEMAAAUXw7O94BhTYzib7uH34PYAADyItn5AAA=",
+                "received_date": "2025-07-05T01:28:30Z",
+                "folder_name": "Inbox",
+                "sender_name": "oncall@sapphirenatgas.grafana.net",
+                "sender_address": "oncall@sapphirenatgas.grafana.net",
+                "conversation_id": "conversation_AAQkADY1NDgwNWVlLTg1ZjYtNDllYi1hNGVkLTA0OWRmYzZiOGY2MQAQAGjKNCs5cTdBpEvI-s40yvY=",
+                "recipients": [
+                    {
+                        "recipient_name": "Witold Kowalczyk",
+                        "recipient_address": "sapphireai@delosintelligence.com"
+                    }
+                ],
+                "cc": [],
+                "bcc": [],
+                "subject": "RCNG Trailer Pressure High Threshold (warning, QU_9264, RNG)",
+                "body": "Most Recent Firing Asset Details:\r\n\r\nAsset Name: QU_9264\r\nStatus: firing \ud83d\udd25\r\nStarts At: 2025-07-05T01:27:40Z\r\n\r\nSensor Name: trailer_pressure\r\nCurrent Value (B): N/A\r\nValue String: [ var='B' labels={asset_name=QU_9264, sensor_name=trailer_pressure} value=2915.8408203125 ], [ var='C' labels={asset_name=QU_9264, sensor_name=trailer_pressure} value=1 ]\r\n\r\nView Alert Rule: Link<https://sapphirenatgas.grafana.net/alerting/grafana/belsi27byicxsa/view?orgId=1>\r\nSilence Alert: Link<https://sapphirenatgas.grafana.net/alerting/silence/new?alertmanager=grafana&matcher=__alert_rule_uid__%3Dbelsi27byicxsa&matcher=asset_name%3DQU_9264&matcher=sensor_name%3Dtrailer_pressure&matcher=severity%3Dwarning&orgId=1>\r\n\r\n________________________________\r\n\r\nSummary of All Alerts in this Notification:\r\nStatus: firing \ud83d\udd25\r\nTotal Alerts: 1\r\nFiring alerts: 1\r\nResolved alerts: 0\r\n\r\nGroupLabels:\r\n\r\n  *   severity: warning\r\n  *   alertname: RCNG Trailer Pressure High Threshold\r\n  *   asset_name: QU_9264\r\n  *   grafana_folder: RNG\r\n\r\nCommonLabels:\r\n\r\n  *   severity: warning\r\n  *   alertname: RCNG Trailer Pressure High Threshold\r\n  *   asset_name: QU_9264\r\n  *   sensor_name: trailer_pressure\r\n  *   grafana_folder: RNG\r\n\r\nView in AlertManager<https://sapphirenatgas.grafana.net/alerting/list?alertState=firing&dataSource=grafana&groupBy=grafana_folder&ruleFilter=RCNG%20Trailer%20Pressure%20High%20Threshold>\r\n\r\n________________________________\r\nAlert Group #1077<https://sapphirenatgas.grafana.net/a/grafana-irm-app/alert-groups/I9N8DZI7TKII3> from RCNG - Grafana Alerting | https://sapphirenatgas.grafana.net | Docs<https://grafana.com/docs/oncall/latest/>\r\n\r\n- Your Grafana OnCall<https://grafana.com/products/cloud/oncall/>\r\n\r\n01:28.970769 UTC",
+                "attachments": [],
+                "structured_output": {
+                    "topic": "RCNG Trailer Pressure High Threshold alert for asset QU_9264",
+                    "sentiment": "urgent and technical"
                 }
             }
         ]
@@ -183,12 +306,12 @@
         "number_of_emails_found": 1,
         "emails": [
             {
-                "email_id": "email_AAMkADJkMDI2OWVhLWI2OTItNDM1ZC05MWE0LTJmMDU5MDIzOGUyYgBGAAAAAADSPFhQkEYdS7EySkZ0Gm-XBwCFGAPdHRJOSK_2wrPgUMlmAAAAAAEMAACFGAPdHRJOSK_2wrPgUMlmAAB1h1q3AAA=",
-                "received_date": "2025-06-30T03:56:30Z",
+                "email_id": "email_AAMkADJkMDI2OWVhLWI2OTItNDM1ZC05MWE0LTJmMDU5MDIzOGUyYgBGAAAAAADSPFhQkEYdS7EySkZ0Gm-XBwCFGAPdHRJOSK_2wrPgUMlmAAAAAAEMAACFGAPdHRJOSK_2wrPgUMlmAAB3UCdZAAA=",
+                "received_date": "2025-07-05T03:56:29Z",
                 "folder_name": "Skrzynka odbiorcza",
                 "sender_name": "Delos AI Inc.",
                 "sender_address": "noreply@email.delosintelligence.com",
-                "conversation_id": "conversation_AAQkADJkMDI2OWVhLWI2OTItNDM1ZC05MWE0LTJmMDU5MDIzOGUyYgAQAJ8RuJXwT1RHpDRXGvDpZGU=",
+                "conversation_id": "conversation_AAQkADJkMDI2OWVhLWI2OTItNDM1ZC05MWE0LTJmMDU5MDIzOGUyYgAQAOzz6GP1dbBBvDIwkgeevNA=",
                 "recipients": [
                     {
                         "recipient_name": "Witold Kowalczyk",
@@ -206,7 +329,7 @@
                 "cc": [],
                 "bcc": [],
                 "subject": "MongoDB Data Backup Migration",
-                "body": "Collection: threads\r\n\r\n- copied into dev collections\r\n\r\n- copied into backup collections\r\n\r\nCollection: thread_items\r\n\r\n- copied into dev collections\r\n\r\n- copied into backup collections\r\n\r\nCollection: L23_agreements\r\n\r\n- copied into dev collections\r\n\r\n- copied into backup collections\r\n\r\nCollection: agents\r\n\r\n- copied into dev collections\r\n\r\n- copied into backup collections\r\n\r\nCollection: agreements\r\n\r\n- copied into dev collections\r\n\r\n- copied into backup collections\r\n\r\nCollection: data\r\n\r\n- copied into dev collections\r\n\r\n- copied into backup collections\r\n\r\nCollection: events\r\n\r\n- copied into dev collections\r\n\r\n- copied into backup collections\r\n\r\nCollection: ledger\r\n\r\n- copied into dev collections\r\n\r\n- copied into backup collections\r\n\r\nCollection: organizations\r\n\r\n- copied into dev collections\r\n\r\n- copied into backup collections\r\n\r\nCollection: users\r\n\r\n- copied into dev collections\r\n\r\n- copied into backup collections\r\n\r\nCollection: document_pool\r\n\r\n- copied into dev collections\r\n\r\n- copied into backup collections\r\n\r\nCollection: agreements_processing is empty. Skipping backup.\r\nCollection: canvas_chats\r\n\r\n- copied into dev collections\r\n\r\n- copied into backup collections\r\n\r\nCollection: canvas_messages\r\n\r\n- copied into dev collections\r\n\r\n- copied into backup collections\r\n\r\nCollection: chats\r\n\r\n- copied into dev collections\r\n\r\n- copied into backup collections\r\n\r\nCollection: chat_documents\r\n\r\n- copied into dev collections\r\n\r\n- copied into backup collections\r\n\r\nCollection: messages\r\n\r\n- copied into dev collections\r\n\r\n- copied into backup collections\r\n\r\nCollection: suggestions is empty. Skipping backup.\r\nCollection: votes is empty. Skipping backup.\r\nCollection: existing_documents\r\n\r\n- copied into dev collections\r\n\r\n- copied into backup collections\r\n\r\nCollection: l2_extraction_schemas\r\n\r\n- copied into dev collections\r\n\r\n- copied into backup collections\r\n\r\nCollection: l2_extraction_categories\r\n\r\n- copied into dev collections\r\n\r\n- copied into backup collections\r\n\r\nCollection: clearinghouse_tokens\r\n\r\n- copied into dev collections\r\n\r\n- copied into backup collections\r\n\r\nCollection: events\r\n\r\n- copied into dev collections\r\n\r\n- copied into backup collections\r\n\r\nCollection: agreements\r\n\r\n- copied into dev collections\r\n\r\n- copied into backup collections\r\n\r\nCollection: ledger\r\n\r\n- copied into dev collections\r\n\r\n- copied into backup collections\r\n\r\nCollection: suppliers\r\n\r\n- copied into dev collections\r\n\r\n- copied into backup collections\r\n\r\nCollection: monthly_leases\r\n\r\n- copied into dev collections\r\n\r\n- copied into backup collections",
+                "body": "Collection: threads\r\n\r\n- copied into dev collections\r\n\r\n- copied into backup collections\r\n\r\nCollection: thread_items\r\n\r\n- copied into dev collections\r\n\r\n- copied into backup collections\r\n\r\nCollection: L23_agreements\r\n\r\n- copied into dev collections\r\n\r\n- copied into backup collections\r\n\r\nCollection: agents\r\n\r\n- copied into dev collections\r\n\r\n- copied into backup collections\r\n\r\nCollection: agreements\r\n\r\n- copied into dev collections\r\n\r\n- copied into backup collections\r\n\r\nCollection: data\r\n\r\n- copied into dev collections\r\n\r\n- copied into backup collections\r\n\r\nCollection: events\r\n\r\n- copied into dev collections\r\n\r\n- copied into backup collections\r\n\r\nCollection: ledger\r\n\r\n- copied into dev collections\r\n\r\n- copied into backup collections\r\n\r\nCollection: organizations\r\n\r\n- copied into dev collections\r\n\r\n- copied into backup collections\r\n\r\nCollection: users\r\n\r\n- copied into dev collections\r\n\r\n- copied into backup collections\r\n\r\nCollection: document_pool\r\n\r\n- copied into dev collections\r\n\r\n- copied into backup collections\r\n\r\nCollection: agreements_processing is empty. Skipping backup.\r\nCollection: canvas_chats\r\n\r\n- copied into dev collections\r\n\r\n- copied into backup collections\r\n\r\nCollection: canvas_messages\r\n\r\n- copied into dev collections\r\n\r\n- copied into backup collections\r\n\r\nCollection: chats\r\n\r\n- copied into dev collections\r\n\r\n- copied into backup collections\r\n\r\nCollection: chat_documents\r\n\r\n- copied into dev collections\r\n\r\n- copied into backup collections\r\n\r\nCollection: messages\r\n\r\n- copied into dev collections\r\n\r\n- copied into backup collections\r\n\r\nCollection: suggestions is empty. Skipping backup.\r\nCollection: votes is empty. Skipping backup.\r\nCollection: existing_documents\r\n\r\n- copied into dev collections\r\n\r\n- copied into backup collections\r\n\r\nCollection: l2_extraction_schemas\r\n\r\n- copied into dev collections\r\n\r\n- copied into backup collections\r\n\r\nCollection: l2_extraction_categories\r\n\r\n- copied into dev collections\r\n\r\n- copied into backup collections\r\n\r\nCollection: clearinghouse_tokens\r\n\r\n- copied into dev collections\r\n\r\n- copied into backup collections\r\n\r\nCollection: events\r\n\r\n- copied into dev collections\r\n\r\n- copied into backup collections\r\n\r\nCollection: agreements\r\n\r\n- copied into dev collections\r\n\r\n- copied into backup collections\r\n\r\nCollection: ledger\r\n\r\n- copied into dev collections\r\n\r\n- copied into backup collections\r\n\r\nCollection: suppliers\r\n\r\n- copied into dev collections\r\n\r\n- copied into backup collections\r\n\r\nCollection: monthly_leases\r\n\r\n- copied into dev collections\r\n\r\n- copied into backup collections\r\n\r\nCollection: rcng_routes\r\n\r\n- copied into dev collections\r\n\r\n- copied into backup collections\r\n\r\nCollection: rcng_rates\r\n\r\n- copied into dev collections\r\n\r\n- copied into backup collections",
                 "attachments": [],
                 "structured_output": {
                     "topic": "Database collections backup and copy status update",

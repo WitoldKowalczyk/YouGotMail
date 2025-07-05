@@ -1,16 +1,16 @@
-from yougotmail.send.send import Send
-from yougotmail.send.reply import Reply
+from yougotmail.ai.ai import AI
+from yougotmail.quick.quick import Quick
 from yougotmail.retrieve.retrieve_emails import RetrieveEmails
 from yougotmail.retrieve.retrieve_conversations import RetrieveConversations
 from yougotmail.retrieve.retrieve_attachments import RetrieveAttachments
-from yougotmail.storage.storage import Storage
-from yougotmail.quick.quick import Quick
+from yougotmail.send.send import Send
+from yougotmail.send.reply import Reply
+from yougotmail._utils._ms_webhook import MSWebhook
 from yougotmail._utils._validation import (
     validate_inputs,
     EMAIL_VALIDATION_RULES,
     ValidationError,
 )
-from yougotmail.ai.ai import AI
 
 
 class YouGotMail:
@@ -22,96 +22,77 @@ class YouGotMail:
         open_ai_api_key="",
         mongo_url="",
         mongo_db_name="",
+        email_collection="",
+        conversation_collection="",
+        attachment_collection="",
         aws_access_key_id="",
         aws_secret_access_key="",
         region_name="",
         bucket_name="",
-        email_collection="",
-        conversation_collection="",
-        attachment_collection="",
     ):
         if client_id is None or client_secret is None or tenant_id is None:
             raise ValueError("client_id, client_secret and tenant_id are required")
 
-        self.send = Send(
-            client_id,
-            client_secret,
-            tenant_id,
-            mongo_url,
-            mongo_db_name,
-            aws_access_key_id,
-            aws_secret_access_key,
-            region_name,
-        )
+        self.send = Send(client_id, client_secret, tenant_id)
         self.retrieve_emails = RetrieveEmails(
             client_id,
             client_secret,
             tenant_id,
-            mongo_url,
-            mongo_db_name,
-            aws_access_key_id,
-            aws_secret_access_key,
-            region_name,
-            bucket_name,
-            email_collection,
-            conversation_collection,
-            attachment_collection,
+            mongo_url=mongo_url,
+            mongo_db_name=mongo_db_name,
+            email_collection=email_collection,
+            conversation_collection=conversation_collection,
+            attachment_collection=attachment_collection,
+            aws_access_key_id=aws_access_key_id,
+            aws_secret_access_key=aws_secret_access_key,
+            region_name=region_name,
+            bucket_name=bucket_name,
         )
         self.retrieve_conversations = RetrieveConversations(
             client_id,
             client_secret,
             tenant_id,
-            mongo_url,
-            mongo_db_name,
-            aws_access_key_id,
-            aws_secret_access_key,
-            region_name,
-            bucket_name,
-            email_collection,
-            conversation_collection,
-            attachment_collection,
+            mongo_url=mongo_url,
+            mongo_db_name=mongo_db_name,
+            email_collection=email_collection,
+            conversation_collection=conversation_collection,
+            attachment_collection=attachment_collection,
+            aws_access_key_id=aws_access_key_id,
+            aws_secret_access_key=aws_secret_access_key,
+            region_name=region_name,
+            bucket_name=bucket_name,
         )
         self.retrieve_attachments = RetrieveAttachments(
             client_id,
             client_secret,
             tenant_id,
-            mongo_url,
-            mongo_db_name,
-            aws_access_key_id,
-            aws_secret_access_key,
-            region_name,
-            bucket_name,
-            email_collection,
-            conversation_collection,
-            attachment_collection,
-        )
-        self.storage = Storage(
-            mongo_url,
-            mongo_db_name,
-            aws_access_key_id,
-            aws_secret_access_key,
-            region_name,
-            bucket_name,
-            email_collection,
-            conversation_collection,
-            attachment_collection,
+            mongo_url=mongo_url,
+            mongo_db_name=mongo_db_name,
+            email_collection=email_collection,
+            conversation_collection=conversation_collection,
+            attachment_collection=attachment_collection,
+            aws_access_key_id=aws_access_key_id,
+            aws_secret_access_key=aws_secret_access_key,
+            region_name=region_name,
+            bucket_name=bucket_name,
         )
         self.quick = Quick(
             client_id,
             client_secret,
             tenant_id,
-            mongo_url,
-            mongo_db_name,
-            aws_access_key_id,
-            aws_secret_access_key,
-            region_name,
-            bucket_name,
-            email_collection,
-            conversation_collection,
-            attachment_collection,
+            mongo_url=mongo_url,
+            mongo_db_name=mongo_db_name,
+            email_collection=email_collection,
+            conversation_collection=conversation_collection,
+            attachment_collection=attachment_collection,
+            aws_access_key_id=aws_access_key_id,
+            aws_secret_access_key=aws_secret_access_key,
+            region_name=region_name,
+            bucket_name=bucket_name,
         )
         self.reply = Reply(client_id, client_secret, tenant_id)
         self.ai = AI(client_id, client_secret, tenant_id, open_ai_api_key)
+        self.ms_webhook = MSWebhook(client_id, client_secret, tenant_id)
 
     # Functions handling email retrieval and conversation retrieval
     @validate_inputs(**EMAIL_VALIDATION_RULES)
@@ -366,3 +347,17 @@ class YouGotMail:
             storage=storage,
             schema=schema,
         )
+
+    def create_microsoft_graph_webhook(self, inbox, api_url, client_state):
+        return self.ms_webhook.create_microsoft_graph_webhook(
+            inbox, api_url, client_state
+        )
+
+    def get_active_subscriptions_for_inbox(self, inbox):
+        return self.ms_webhook.get_active_subscriptions_for_inbox(inbox)
+
+    def delete_microsoft_subscription(self, subscription_id):
+        return self.ms_webhook.delete_subscription(subscription_id)
+
+    def renew_subscriptions(self, inbox):
+        return self.ms_webhook.renew_subscriptions(inbox)

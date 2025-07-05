@@ -13,39 +13,30 @@ class RetrieveAttachments:
         tenant_id,
         mongo_url="",
         mongo_db_name="",
+        email_collection="",
+        conversation_collection="",
+        attachment_collection="",
         aws_access_key_id="",
         aws_secret_access_key="",
         region_name="",
         bucket_name="",
-        email_collection="emails",
-        conversation_collection="conversations",
-        attachment_collection="attachments",
     ):
         self.utils = Utils()
         self.token = self.utils._generate_MS_graph_token(
             client_id, client_secret, tenant_id
         )
-        self.storage = Storage(
-            mongo_url,
-            mongo_db_name,
-            aws_access_key_id,
-            aws_secret_access_key,
-            region_name,
-            bucket_name,
-            email_collection,
-            conversation_collection,
-            attachment_collection,
+        self.db_storage = Storage(
+            mongo_url=mongo_url,
+            mongo_db_name=mongo_db_name,
+            email_collection=email_collection,
+            conversation_collection=conversation_collection,
+            attachment_collection=attachment_collection,
+            aws_access_key_id=aws_access_key_id,
+            aws_secret_access_key=aws_secret_access_key,
+            region_name=region_name,
+            bucket_name=bucket_name,
         )
-        self.retrieval_utils = RetrievalUtils(
-            client_id,
-            client_secret,
-            tenant_id,
-            mongo_url,
-            mongo_db_name,
-            aws_access_key_id,
-            aws_secret_access_key,
-            region_name,
-        )
+        self.retrieval_utils = RetrievalUtils(client_id, client_secret, tenant_id)
 
     def get_attachments(
         self,
@@ -107,7 +98,7 @@ class RetrieveAttachments:
                     return None
 
             if storage and len(attachments_list) > 0:
-                self.storage.store_attachments(attachments_list)
+                self.db_storage.store_attachments(attachments_list)
                 attachments_list = self.utils._convert_datetimes(
                     self.utils._remove_objectid_from_list(attachments_list)
                 )
