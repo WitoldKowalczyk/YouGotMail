@@ -2,7 +2,6 @@ import requests
 import datetime
 from dateutil.parser import parse as parse_date
 from yougotmail._utils._utils import Utils
-from yougotmail.storage.storage import Storage
 from yougotmail.retrieve.retrieve_attachments import RetrieveAttachments
 from yougotmail.retrieve.retrieval_utils import RetrievalUtils
 
@@ -27,28 +26,40 @@ class RetrieveEmails:
         self.token = self.utils._generate_MS_graph_token(
             client_id, client_secret, tenant_id
         )
-        self.db_storage = Storage(
-            mongo_url=mongo_url,
-            mongo_db_name=mongo_db_name,
-            email_collection=email_collection,
-            conversation_collection=conversation_collection,
-            attachment_collection=attachment_collection,
-            aws_access_key_id=aws_access_key_id,
-            aws_secret_access_key=aws_secret_access_key,
-            region_name=region_name,
-            bucket_name=bucket_name,
-        )
+        
+        # Store storage configuration but don't initialize yet
+        self._storage_config = {
+            'mongo_url': mongo_url,
+            'mongo_db_name': mongo_db_name,
+            'email_collection': email_collection,
+            'conversation_collection': conversation_collection,
+            'attachment_collection': attachment_collection,
+            'aws_access_key_id': aws_access_key_id,
+            'aws_secret_access_key': aws_secret_access_key,
+            'region_name': region_name,
+            'bucket_name': bucket_name,
+        }
+        self._db_storage = None
+        
         self.retrieve_attachments = RetrieveAttachments(
             client_id,
             client_secret,
             tenant_id,
-            mongo_url,
-            mongo_db_name,
-            aws_access_key_id,
-            aws_secret_access_key,
-            region_name,
+            **self._storage_config
         )
         self.retrieval_utils = RetrievalUtils(client_id, client_secret, tenant_id)
+
+    def _ensure_storage(self):
+        """Lazy initialization of storage"""
+        if self._db_storage is None:
+            from yougotmail.storage.storage import Storage
+            self._db_storage = Storage(**self._storage_config)
+        return self._db_storage
+
+    @property
+    def db_storage(self):
+        """Property to access storage only when needed"""
+        return self._ensure_storage()
 
     def get_emails(
         self,
@@ -130,13 +141,12 @@ class RetrieveEmails:
                 else:
                     return None
 
-            if storage == "emails":
-                self.db_storage.store_emails(inboxes_list)
-                inboxes_list = self.utils._convert_datetimes(
-                    self.utils._remove_objectid_from_list(inboxes_list)
-                )
-            elif storage == "emails_and_attachments":
-                self.db_storage.store_emails_and_attachments(inboxes_list)
+            if storage in ['emails', 'emails_and_attachments']:
+                storage_instance = self._ensure_storage()
+                if storage == 'emails':
+                    storage_instance.store_emails(inboxes_list)
+                else:
+                    storage_instance.store_emails_and_attachments(inboxes_list)
                 inboxes_list = self.utils._convert_datetimes(
                     self.utils._remove_objectid_from_list(inboxes_list)
                 )

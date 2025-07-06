@@ -1,4 +1,3 @@
-from openai import OpenAI
 import json
 import yougotmail.ai._ai_prompts as prompts
 import yougotmail.ai._ai_schemas as schemas
@@ -17,7 +16,12 @@ class AIHandler:
         model="gpt-4.1",
         reasoning_effort="",
     ):
-        self.client = OpenAI(api_key=open_ai_api_key)
+        try:
+            from openai import OpenAI
+            self.client = OpenAI(api_key=open_ai_api_key)
+        except ImportError:
+            raise ImportError("OpenAI package is not installed. Install it with 'pip install yougotmail[ai]'")
+        
         self.prompt = prompt
         self.prompt_name = prompt_name
         self.schema_name = schema_name

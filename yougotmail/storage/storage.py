@@ -1,6 +1,4 @@
-from pymongo import MongoClient
 import base64
-import boto3
 from yougotmail._utils._utils import Utils
 
 
@@ -17,75 +15,46 @@ class Storage:
         region_name="",
         bucket_name="",
     ):
-        # Check if MongoDB credentials are present
-        mongo_credentials_present = all(
-            [
-                mongo_url,
-                mongo_db_name,
-                email_collection,
-                conversation_collection,
-                attachment_collection,
-            ]
-        )
+        # Store configuration but don't initialize connections
+        self.mongo_config = {
+            'url': mongo_url,
+            'db_name': mongo_db_name,
+            'email_collection': email_collection,
+            'conversation_collection': conversation_collection,
+            'attachment_collection': attachment_collection,
+        }
+        
+        self.aws_config = {
+            'aws_access_key_id': aws_access_key_id,
+            'aws_secret_access_key': aws_secret_access_key,
+            'region_name': region_name,
+            'bucket_name': bucket_name,
+        }
 
-        # Check if AWS credentials are present
-        aws_credentials_present = all(
-            [
-                aws_access_key_id,
-                aws_secret_access_key,
-                region_name,
-                bucket_name,
-            ]
-        )
+        self.utils = Utils()
+        self._mongo_client = None
+        self._s3_client = None
+        self._db = None
+        self._emails_collection = None
+        self._conversations_collection = None
+        self._attachments_collection = None
+        self.enabled = self._check_credentials()
 
+    def _check_credentials(self):
         # Check if we're in Lambda (only need region and bucket)
         lambda_environment = all(
             [
-                region_name,
-                bucket_name,
+                self.aws_config['region_name'],
+                self.aws_config['bucket_name'],
             ]
         )
 
-        if mongo_credentials_present and (
-            aws_credentials_present or lambda_environment
+        if all(self.mongo_config.values()) and (
+            all(self.aws_config.values()) or lambda_environment
         ):
-            # Initialize MongoDB
-            self.client = MongoClient(mongo_url)
-            self.db = self.client.get_database(mongo_db_name)
-            self.utils = Utils()
-
-            # Default database collections
-            self.emails_collection = self.db.get_collection(email_collection)
-            self.conversations_collection = self.db.get_collection(
-                conversation_collection
-            )
-            self.attachments_collection = self.db.get_collection(attachment_collection)
-
-            # Initialize S3 client based on environment
-            if aws_credentials_present:
-                self.s3_client = boto3.client(
-                    "s3",
-                    aws_access_key_id=aws_access_key_id,
-                    aws_secret_access_key=aws_secret_access_key,
-                    region_name=region_name,
-                )
-            else:
-                # Lambda environment - use implicit credentials
-                self.s3_client = boto3.client("s3", region_name=region_name)
-
-            self.attachments_bucket_name = bucket_name
-            self.enabled = True
+            return True
         else:
-            # Storage is disabled - set all to None
-            self.client = None
-            self.db = None
-            self.utils = None
-            self.emails_collection = None
-            self.conversations_collection = None
-            self.attachments_collection = None
-            self.s3_client = None
-            self.attachments_bucket_name = None
-            self.enabled = False
+            return False
 
     def store_emails(self, inbox_list):
         if not self.enabled:
@@ -113,7 +82,7 @@ class Storage:
                         }
                         new_attachment_list.append(new_attachment)
                     email["attachments"] = new_attachment_list
-                    self.emails_collection.insert_one(email)
+                    self._emails_collection.insert_one(email)
                     print(f"Email document saved in mongo: {email['email_id']}")
         except Exception as e:
             print(f"Error in store_emails: {e}")
@@ -152,7 +121,7 @@ class Storage:
                             }
                             new_attachment_list.append(new_attachment)
                         email["attachments"] = new_attachment_list
-                    self.emails_collection.insert_one(email)
+                    self._emails_collection.insert_one(email)
                     print(f"Email document saved in mongo: {email['email_id']}")
         except Exception as e:
             print(f"Error in store_emails: {e}")
@@ -179,7 +148,7 @@ class Storage:
                     "contentType": attachment["contentType"],
                     "url": file_metadata["url"],
                 }
-                self.attachments_collection.insert_one(new_attachment)
+                self._attachments_collection.insert_one(new_attachment)
                 print(
                     f"Attachment document saved in mongo: {attachment['attachment_id']}"
                 )
@@ -187,7 +156,7 @@ class Storage:
     def _check_if_email_exists(self, email_id):
         if not self.enabled:
             return False
-        existing_email = self.emails_collection.find_one({"email_id": email_id})
+        existing_email = self._emails_collection.find_one({"email_id": email_id})
         if existing_email:
             return True
         else:
@@ -196,7 +165,7 @@ class Storage:
     def _check_if_attachment_exists(self, attachment_id):
         if not self.enabled:
             return False
-        existing_attachment = self.attachments_collection.find_one(
+        existing_attachment = self._attachments_collection.find_one(
             {"attachment_id": attachment_id}
         )
         if existing_attachment:
@@ -207,7 +176,7 @@ class Storage:
     def _check_if_conversation_exists(self, conversation_id):
         if not self.enabled:
             return False
-        existing_conversation = self.conversations_collection.find_one(
+        existing_conversation = self._conversations_collection.find_one(
             {"conversation_id": conversation_id}
         )
         if existing_conversation:
@@ -284,11 +253,11 @@ class Storage:
                 "file_name": file_name,
                 "date": file_date,
                 "contentType": contentType,
-                "url": f"https://{self.attachments_bucket_name}.s3.amazonaws.com/{file_date}_{file_name_with_underscores}",
+                "url": f"https://{self.aws_config['bucket_name']}.s3.amazonaws.com/{file_date}_{file_name_with_underscores}",
             }
 
-            self.s3_client.put_object(
-                Bucket=self.attachments_bucket_name,
+            self._s3_client.put_object(
+                Bucket=self.aws_config['bucket_name'],
                 Key=file_name,
                 Body=body,
                 ContentType=contentType,
@@ -319,7 +288,7 @@ class Storage:
             email["attachments"] = new_attachments
         conversation_object["emails"] = emails
         if self._check_if_conversation_exists(conversation_object["conversation_id"]):
-            self.conversations_collection.update_one(
+            self._conversations_collection.update_one(
                 {"conversation_id": conversation_object["conversation_id"]},
                 {"$set": conversation_object},
             )
@@ -327,7 +296,7 @@ class Storage:
                 f"Updated conversation document saved in mongo: {conversation_object['conversation_id']}"
             )
         else:
-            self.conversations_collection.insert_one(conversation_object)
+            self._conversations_collection.insert_one(conversation_object)
             print(
                 f"New conversation document saved in mongo: {conversation_object['conversation_id']}"
             )
@@ -360,7 +329,7 @@ class Storage:
             email["attachments"] = new_attachments
         conversation_object["emails"] = emails
         if self._check_if_conversation_exists(conversation_object["conversation_id"]):
-            self.conversations_collection.update_one(
+            self._conversations_collection.update_one(
                 {"conversation_id": conversation_object["conversation_id"]},
                 {"$set": conversation_object},
             )
@@ -368,7 +337,7 @@ class Storage:
                 f"Updated conversation document saved in mongo: {conversation_object['conversation_id']}"
             )
         else:
-            self.conversations_collection.insert_one(conversation_object)
+            self._conversations_collection.insert_one(conversation_object)
             print(
                 f"New conversation document saved in mongo: {conversation_object['conversation_id']}"
             )

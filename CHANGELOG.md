@@ -33,3 +33,22 @@ All notable changes to this project will be documented in this file.
 - updated docs and instructions
 - modified installation & dependency handling - basic install comes without OpenAI, AWS or MongoDB dependencies. You can use `pip install yougotmail[openai]` to install the dependencies for OpenAI, `pip install yougotmail[boto3]` to install the dependencies for AWS, or `pip install yougotmail[pymongo]` to install the dependencies for MongoDB.
 
+## [0.0.6] - 2025-07-06
+### Changed
+- minor fixes
+
+## [0.0.7] - 2025-07-06
+### Changed
+- minor fixes
+
+## [0.0.8] - 2025-07-06
+### Changed
+- minor fixes
+
+## [0.0.9] - 2025-07-06
+### Changed
+- minor fixes
+
+## [0.0.10] - 2025-07-06
+### Changed
+- minor fixes

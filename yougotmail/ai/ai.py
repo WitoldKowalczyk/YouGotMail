@@ -1,19 +1,28 @@
-from yougotmail.ai._ai_handler import AIHandler
-from typing import Any, Dict
 from yougotmail.retrieve.retrieve_emails import RetrieveEmails
+from typing import Any, Dict
 
 
 class AI:
-    def __init__(self, client_id, client_secret, tenant_id, open_ai_api_key):
+    def __init__(self, client_id, client_secret, tenant_id, open_ai_api_key=None):
         self.retrieve_emails = RetrieveEmails(client_id, client_secret, tenant_id)
-        if all([open_ai_api_key]):
-            self.open_ai_api_key = open_ai_api_key
-        else:
-            self.open_ai_api_key = None
+        self.open_ai_api_key = open_ai_api_key
+        # Don't try to import OpenAI here - wait until methods are called
+
+    def _ensure_ai_handler(self):
+        """Lazy import of AI Handler to avoid immediate OpenAI dependency"""
+        if not self.open_ai_api_key:
+            raise ValueError("OpenAI API key is required for AI functionality. Please provide it when initializing the YouGotMail class.")
+            
+        try:
+            from yougotmail.ai._ai_handler import AIHandler
+            return AIHandler
+        except ImportError:
+            raise ImportError("OpenAI package is not installed. Install it with 'pip install yougotmail[openai]'")
 
     def ai_structured_output_from_email_body(
         self, *, email_body: str, schema: Dict[str, Any]
     ):
+        AIHandler = self._ensure_ai_handler()
         schema = {
             "type": "json_schema",
             "json_schema": {
@@ -41,9 +50,7 @@ class AI:
             content=content_for_ai,
         )
 
-        classification = ai.main()
-
-        return classification
+        return ai.main()
 
     def ai_get_emails_with_structured_output(
         self,

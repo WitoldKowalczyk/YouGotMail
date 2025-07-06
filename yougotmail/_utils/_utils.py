@@ -1,7 +1,5 @@
 from datetime import timezone, datetime
 import requests
-from bson import ObjectId
-
 
 class Utils:
     def __init__(self):
@@ -53,38 +51,6 @@ class Utils:
 
     def _now_utc(self):
         return datetime.now(timezone.utc)
-
-    def _remove_objectid(self, doc):
-        """Helper to remove the _id field from a document and convert ObjectIds to strings."""
-        if not doc:
-            return doc
-
-        if isinstance(doc, ObjectId):
-            return str(doc)
-        elif isinstance(doc, dict):
-            doc = dict(doc)  # Make a copy to avoid mutating the original
-            # Remove _id field if present
-            if "_id" in doc:
-                del doc["_id"]
-            # Recursively process all values
-            for key, value in doc.items():
-                doc[key] = self._remove_objectid(value)
-            return doc
-        elif isinstance(doc, list):
-            return [self._remove_objectid(item) for item in doc]
-        else:
-            return doc
-
-    def _remove_objectid_from_list(self, data_list):
-        """Helper to remove the _id field and convert ObjectIds from a list of documents."""
-        if not data_list:
-            return data_list
-
-        # Process each item in the list
-        for i, item in enumerate(data_list):
-            data_list[i] = self._remove_objectid(item)
-
-        return data_list
 
     def _convert_datetimes(self, obj):
         """Recursively convert datetime objects to ISO strings in dicts/lists."""
@@ -257,3 +223,40 @@ class Utils:
         message_lines.append("=" * 40)
 
         return "\n".join(message_lines)
+
+    def _remove_objectid(self, doc):
+        """Helper to remove the _id field from a document and convert ObjectIds to strings."""
+        try:
+            from bson import ObjectId
+        except ImportError:
+            raise ImportError("MongoDB package is not installed. Install it with 'pip install yougotmail[pymongo]'")
+        
+        if not doc:
+            return doc
+
+        if isinstance(doc, ObjectId):
+            return str(doc)
+        elif isinstance(doc, dict):
+            doc = dict(doc)  # Make a copy to avoid mutating the original
+            # Remove _id field if present
+            if "_id" in doc:
+                del doc["_id"]
+            # Recursively process all values
+            for key, value in doc.items():
+                doc[key] = self._remove_objectid(value)
+            return doc
+        elif isinstance(doc, list):
+            return [self._remove_objectid(item) for item in doc]
+        else:
+            return doc
+
+    def _remove_objectid_from_list(self, data_list):
+        """Helper to remove the _id field and convert ObjectIds from a list of documents."""
+        if not data_list:
+            return data_list
+
+        # Process each item in the list
+        for i, item in enumerate(data_list):
+            data_list[i] = self._remove_objectid(item)
+
+        return data_list

@@ -91,8 +91,25 @@ class YouGotMail:
             bucket_name=bucket_name,
         )
         self.reply = Reply(client_id, client_secret, tenant_id)
-        self.ai = AI(client_id, client_secret, tenant_id, open_ai_api_key)
+        # Store credentials for lazy AI initialization
+        self._ai_credentials = {
+            'client_id': client_id,
+            'client_secret': client_secret,
+            'tenant_id': tenant_id,
+            'open_ai_api_key': open_ai_api_key
+        }
+        self._ai_instance = None
         self.ms_webhook = MSWebhook(client_id, client_secret, tenant_id)
+
+    def _get_ai(self):
+        """Lazy initialization of AI component"""
+        if self._ai_instance is None:
+            try:
+                from yougotmail.ai import AI
+                self._ai_instance = AI(**self._ai_credentials)
+            except ImportError:
+                raise ImportError("OpenAI dependencies are not installed. Install them with 'pip install yougotmail[ai]'")
+        return self._ai_instance
 
     # Functions handling email retrieval and conversation retrieval
     @validate_inputs(**EMAIL_VALIDATION_RULES)
@@ -288,9 +305,8 @@ class YouGotMail:
         )
 
     def ai_structured_output_from_email_body(self, email_body, schema):
-        return self.ai.ai_structured_output_from_email_body(
-            email_body=email_body, schema=schema
-        )
+        ai = self._get_ai()
+        return ai.ai_structured_output_from_email_body(email_body=email_body, schema=schema)
 
     @validate_inputs(**EMAIL_VALIDATION_RULES)
     def ai_get_emails_with_structured_output(
@@ -318,13 +334,14 @@ class YouGotMail:
         storage=None,
         schema={}
     ):
+        ai = self._get_ai()
         # Add custom validation logic specific to this function
         if range and (start_date or end_date or start_time or end_time):
             raise ValidationError(
                 "Cannot specify both 'range' and custom date/time parameters"
             )
 
-        return self.ai.ai_get_emails_with_structured_output(
+        return ai.ai_get_emails_with_structured_output(
             inbox=inbox,
             range=range,
             start_date=start_date,
