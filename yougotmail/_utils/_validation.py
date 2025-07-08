@@ -224,7 +224,7 @@ EMAIL_VALIDATION_RULES = {
     },
     "cc": {"type": list, "item_validator": InputValidator.validate_email_address},
     "bcc": {"type": list, "item_validator": InputValidator.validate_email_address},
-    "folder_path": {"type": list},
+    "folder_path": {"type": str},
     "drafts": {"type": bool},
     "archived": {"type": bool},
     "deleted": {"type": bool},

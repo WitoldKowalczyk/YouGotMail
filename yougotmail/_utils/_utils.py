@@ -1,6 +1,7 @@
 from datetime import timezone, datetime
 import requests
 
+
 class Utils:
     def __init__(self):
         pass
@@ -201,7 +202,7 @@ class Utils:
 
         # Folder filter
         if folder_path:
-            folder_display = " > ".join(folder_path)
+            folder_display = folder_path
             message_lines.append(f"📁 Folder Filter: {folder_display}")
 
         # Attachments
@@ -229,8 +230,10 @@ class Utils:
         try:
             from bson import ObjectId
         except ImportError:
-            raise ImportError("MongoDB package is not installed. Install it with 'pip install yougotmail[pymongo]'")
-        
+            raise ImportError(
+                "MongoDB package is not installed. Install it with 'pip install yougotmail[pymongo]'"
+            )
+
         if not doc:
             return doc
 

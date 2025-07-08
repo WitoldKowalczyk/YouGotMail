@@ -1,4 +1,3 @@
-from yougotmail.ai.ai import AI
 from yougotmail.quick.quick import Quick
 from yougotmail.retrieve.retrieve_emails import RetrieveEmails
 from yougotmail.retrieve.retrieve_conversations import RetrieveConversations
@@ -11,7 +10,6 @@ from yougotmail._utils._validation import (
     EMAIL_VALIDATION_RULES,
     ValidationError,
 )
-
 
 class YouGotMail:
     def __init__(
@@ -93,10 +91,10 @@ class YouGotMail:
         self.reply = Reply(client_id, client_secret, tenant_id)
         # Store credentials for lazy AI initialization
         self._ai_credentials = {
-            'client_id': client_id,
-            'client_secret': client_secret,
-            'tenant_id': tenant_id,
-            'open_ai_api_key': open_ai_api_key
+            "client_id": client_id,
+            "client_secret": client_secret,
+            "tenant_id": tenant_id,
+            "open_ai_api_key": open_ai_api_key,
         }
         self._ai_instance = None
         self.ms_webhook = MSWebhook(client_id, client_secret, tenant_id)
@@ -105,10 +103,13 @@ class YouGotMail:
         """Lazy initialization of AI component"""
         if self._ai_instance is None:
             try:
-                from yougotmail.ai import AI
+                from yougotmail.ai.ai import AI
+
                 self._ai_instance = AI(**self._ai_credentials)
             except ImportError:
-                raise ImportError("OpenAI dependencies are not installed. Install them with 'pip install yougotmail[ai]'")
+                raise ImportError(
+                    "OpenAI dependencies are not installed. Install them with 'pip install yougotmail[openai]'"
+                )
         return self._ai_instance
 
     # Functions handling email retrieval and conversation retrieval
@@ -128,13 +129,13 @@ class YouGotMail:
         recipients=[],
         cc=[],
         bcc=[],
-        folder_path=[],
+        folder_path="",
         drafts=False,
         archived=False,
         deleted=False,
         sent=False,
         read="all",
-        attachments=True,
+        attachments=False,
         storage=None
     ):
         # Add custom validation logic specific to this function
@@ -180,6 +181,7 @@ class YouGotMail:
         sender_address="",
         read="all",
         attachments=False,
+        storage=None
     ):
         return self.retrieve_conversations.get_conversation(
             inbox=inbox,
@@ -194,6 +196,7 @@ class YouGotMail:
             sender_address=sender_address,
             read=read,
             attachments=attachments,
+            storage=storage,
         )
 
     def get_attachments(
@@ -216,7 +219,7 @@ class YouGotMail:
         deleted=False,
         sent=False,
         read="all",
-        storage=False,
+        storage=None,
     ):
         return self.retrieve_attachments.get_attachments(
             inbox=inbox,
@@ -296,6 +299,9 @@ class YouGotMail:
     def get_unread_emails(self, inbox):
         return self.quick.get_unread_emails(inbox)
 
+    def draft_reply_to_email(self, inbox="", email="", email_id=""):
+        return self.reply.draft_reply_to_email(inbox, email, email_id)
+
     # Functions handling email replies
     def reply_to_email(
         self, inbox="", email_id="", email_body="", cc_recipients=[], bcc_recipients=[]
@@ -306,7 +312,9 @@ class YouGotMail:
 
     def ai_structured_output_from_email_body(self, email_body, schema):
         ai = self._get_ai()
-        return ai.ai_structured_output_from_email_body(email_body=email_body, schema=schema)
+        return ai.ai_structured_output_from_email_body(
+            email_body=email_body, schema=schema
+        )
 
     @validate_inputs(**EMAIL_VALIDATION_RULES)
     def ai_get_emails_with_structured_output(
@@ -365,6 +373,10 @@ class YouGotMail:
             schema=schema,
         )
 
+    def ai_agent_with_tools(self, inbox,prompt):
+        ai = self._get_ai()
+        return ai.ai_agent_with_tools(inbox=inbox, prompt=prompt)
+
     def create_microsoft_graph_webhook(self, inbox, api_url, client_state):
         return self.ms_webhook.create_microsoft_graph_webhook(
             inbox, api_url, client_state
@@ -373,7 +385,7 @@ class YouGotMail:
     def get_active_subscriptions_for_inbox(self, inbox):
         return self.ms_webhook.get_active_subscriptions_for_inbox(inbox)
 
-    def delete_microsoft_subscription(self, subscription_id):
+    def delete_subscription(self, subscription_id):
         return self.ms_webhook.delete_subscription(subscription_id)
 
     def renew_subscriptions(self, inbox):

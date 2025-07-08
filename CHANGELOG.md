@@ -52,3 +52,21 @@ All notable changes to this project will be documented in this file.
 ## [0.0.10] - 2025-07-06
 ### Changed
 - minor fixes
+
+## [0.0.11] - 2025-07-08
+### Added
+- `ai_agent_with_tools()` method for running an AI agent with tools.
+- `test_ai_agent.py` file for testing the AI agent with tools.
+- `test_ai_parsing.py` file for testing the AI parsing functionality.
+- `test_ai_agent_with_tools.py` file for testing the AI agent with tools.
+
+### Changed
+- `storage` parameter to `get_emails()` method for storing emails and attachments in MongoDB.
+- `conversation_2.json` file for testing the AI parsing functionality.
+- `test_ai_agent_with_tools.py` file for testing the AI agent with tools.
+- `test_ai_agent_with_tools.py` file for testing the AI agent with tools.
+- `test_ai_agent_with_tools.py` file for testing the AI agent with tools.
+
+## [0.0.12] - 2025-07-08
+### Added
+- minor fixes

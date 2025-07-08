@@ -17,7 +17,7 @@ def test_ai_parsing():
     try:
         emails = ygm.ai_get_emails_with_structured_output(
             inbox=[os.environ.get("INBOX_1"), os.environ.get("INBOX_2")],
-            range="last_8_hours",
+            range="last_24_hours",
             attachments=False,
             schema={
                 "topic": {"type": "string", "description": "The topic of the email"},

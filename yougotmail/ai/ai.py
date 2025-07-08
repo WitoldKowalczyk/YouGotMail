@@ -1,4 +1,6 @@
 from yougotmail.retrieve.retrieve_emails import RetrieveEmails
+from yougotmail.ai._ai_prompts import AGENT_INSTRUCTIONS
+from yougotmail.ai._ai_tools import AI_TOOLS, TOOLS
 from typing import Any, Dict
 
 
@@ -6,23 +8,32 @@ class AI:
     def __init__(self, client_id, client_secret, tenant_id, open_ai_api_key=None):
         self.retrieve_emails = RetrieveEmails(client_id, client_secret, tenant_id)
         self.open_ai_api_key = open_ai_api_key
-        # Don't try to import OpenAI here - wait until methods are called
+        self.client_id = client_id
+        self.client_secret = client_secret
+        self.tenant_id = tenant_id
 
     def _ensure_ai_handler(self):
         """Lazy import of AI Handler to avoid immediate OpenAI dependency"""
         if not self.open_ai_api_key:
-            raise ValueError("OpenAI API key is required for AI functionality. Please provide it when initializing the YouGotMail class.")
-            
+            raise ValueError(
+                "OpenAI API key is required for AI functionality. Please provide it when initializing the YouGotMail class."
+            )
+
         try:
             from yougotmail.ai._ai_handler import AIHandler
-            return AIHandler
+
+            return AIHandler(
+                open_ai_api_key=self.open_ai_api_key
+            )
         except ImportError:
-            raise ImportError("OpenAI package is not installed. Install it with 'pip install yougotmail[openai]'")
+            raise ImportError(
+                "OpenAI package is not installed. Install it with 'pip install yougotmail[openai]'"
+            )
 
     def ai_structured_output_from_email_body(
         self, *, email_body: str, schema: Dict[str, Any]
     ):
-        AIHandler = self._ensure_ai_handler()
+        ai_handler = self._ensure_ai_handler()
         schema = {
             "type": "json_schema",
             "json_schema": {
@@ -43,14 +54,12 @@ class AI:
             Here is the email content: {email_body}
             """
 
-        ai = AIHandler(
-            open_ai_api_key=self.open_ai_api_key,
-            prompt_name="EMAIL_EXTRACTION_PROMPT",
+        return ai_handler.structured_outputs(
+            prompt=f"Extract the following information from the email: {schema}",
             schema=schema,
             content=content_for_ai,
+            model="gpt-4.1",
         )
-
-        return ai.main()
 
     def ai_get_emails_with_structured_output(
         self,
@@ -112,3 +121,17 @@ class AI:
             inbox["emails"] = emails_list
             inbox_list.append(inbox)
         return inbox_list
+
+    def ai_agent_with_tools(self, inbox, prompt):
+        try:
+            ai_handler = self._ensure_ai_handler()
+            return ai_handler.function_calling(
+                instructions=AGENT_INSTRUCTIONS,
+                prompt=prompt,
+                model="gpt-4.1",
+                tools=TOOLS,
+                ai_tools=AI_TOOLS(self.client_id, self.client_secret, self.tenant_id, inbox),
+            )
+        except Exception as e:
+            print(f"Error in ai_agent_with_tools: {e}")
+            return None

@@ -1,7 +1,6 @@
 import base64
 from yougotmail._utils._utils import Utils
 
-
 class Storage:
     def __init__(
         self,
@@ -17,18 +16,18 @@ class Storage:
     ):
         # Store configuration but don't initialize connections
         self.mongo_config = {
-            'url': mongo_url,
-            'db_name': mongo_db_name,
-            'email_collection': email_collection,
-            'conversation_collection': conversation_collection,
-            'attachment_collection': attachment_collection,
+            "url": mongo_url,
+            "db_name": mongo_db_name,
+            "email_collection": email_collection,
+            "conversation_collection": conversation_collection,
+            "attachment_collection": attachment_collection,
         }
-        
+
         self.aws_config = {
-            'aws_access_key_id': aws_access_key_id,
-            'aws_secret_access_key': aws_secret_access_key,
-            'region_name': region_name,
-            'bucket_name': bucket_name,
+            "aws_access_key_id": aws_access_key_id,
+            "aws_secret_access_key": aws_secret_access_key,
+            "region_name": region_name,
+            "bucket_name": bucket_name,
         }
 
         self.utils = Utils()
@@ -39,13 +38,15 @@ class Storage:
         self._conversations_collection = None
         self._attachments_collection = None
         self.enabled = self._check_credentials()
+        if self.enabled:
+            self._initialize_connections()
 
     def _check_credentials(self):
         # Check if we're in Lambda (only need region and bucket)
         lambda_environment = all(
             [
-                self.aws_config['region_name'],
-                self.aws_config['bucket_name'],
+                self.aws_config["region_name"],
+                self.aws_config["bucket_name"],
             ]
         )
 
@@ -55,6 +56,37 @@ class Storage:
             return True
         else:
             return False
+
+    def _initialize_connections(self):
+        """Initialize MongoDB and S3 connections if credentials are available."""
+        try:
+            # Initialize MongoDB connection
+            import pymongo
+            self._mongo_client = pymongo.MongoClient(self.mongo_config["url"])
+            self._db = self._mongo_client[self.mongo_config["db_name"]]
+            self._emails_collection = self._db[self.mongo_config["email_collection"]]
+            self._conversations_collection = self._db[self.mongo_config["conversation_collection"]]
+            self._attachments_collection = self._db[self.mongo_config["attachment_collection"]]
+            
+            # Initialize S3 connection
+            import boto3
+            if all([self.aws_config["aws_access_key_id"], self.aws_config["aws_secret_access_key"]]):
+                # If we have explicit credentials
+                self._s3_client = boto3.client(
+                    's3',
+                    aws_access_key_id=self.aws_config["aws_access_key_id"],
+                    aws_secret_access_key=self.aws_config["aws_secret_access_key"],
+                    region_name=self.aws_config["region_name"]
+                )
+            else:
+                # If we're in Lambda or using IAM roles
+                self._s3_client = boto3.client(
+                    's3',
+                    region_name=self.aws_config["region_name"]
+                )
+        except Exception as e:
+            print(f"Error initializing connections: {e}")
+            self.enabled = False
 
     def store_emails(self, inbox_list):
         if not self.enabled:
@@ -257,7 +289,7 @@ class Storage:
             }
 
             self._s3_client.put_object(
-                Bucket=self.aws_config['bucket_name'],
+                Bucket=self.aws_config["bucket_name"],
                 Key=file_name,
                 Body=body,
                 ContentType=contentType,

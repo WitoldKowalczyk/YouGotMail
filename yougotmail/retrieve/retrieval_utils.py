@@ -200,11 +200,21 @@ class RetrievalUtils:
             url = resp.get("@odata.nextLink")  # Follow pagination if present
         raise Exception(f"Folder '{name}' not found in {parent_id}")
 
-    def _resolve_folder_path(self, path: list[str], inbox: str) -> str:
+    def _resolve_folder_path(self, path: str | list[str], inbox: str) -> str:
         folder_id = "inbox"
-        print(path)
-        for part in path:
-            print(f"\033[1;31mSearching for folder {part} in {folder_id}\033[0m")
+
+        # Convert string path to list if needed
+        if isinstance(path, str):
+            # Handle empty string case
+            if not path:
+                return folder_id
+            # Split by "/" and filter out empty strings (handles cases like "path//path")
+            path_parts = [p for p in path.split("/") if p]
+        else:
+            path_parts = path
+
+        # Process the path parts
+        for part in path_parts:
             folder_id = self._get_child_folder_id(
                 parent_id=folder_id, name=part, inbox=inbox
             )

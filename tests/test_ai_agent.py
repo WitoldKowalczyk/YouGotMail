@@ -9,17 +9,16 @@ ygm = YouGotMail(
     client_id=os.environ.get("MS_CLIENT_ID"),
     client_secret=os.environ.get("MS_CLIENT_SECRET"),
     tenant_id=os.environ.get("MS_TENANT_ID"),
+    open_ai_api_key=os.environ.get("OPENAI_API_KEY"),
 )
 
-
-def test_get_emails():
+def test_ai_agent_with_tools():
     try:
-        emails = ygm.get_emails(
-            inbox=[os.environ.get("INBOX_1")],
-            range="last_30_minutes",
-            attachments=False,
-        )
-        with open("emails.json", "w") as f:
-            json.dump(emails, f, indent=4)
+        prompt = input("Enter your prompt: ")
+        response = ygm.ai_agent_with_tools(
+            inbox=os.environ.get("INBOX_1"),
+            prompt=prompt
+            )
+        print(response)
     except Exception as e:
         print(f"Error: {e}")

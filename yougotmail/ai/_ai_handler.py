@@ -1,93 +1,136 @@
 import json
-import yougotmail.ai._ai_prompts as prompts
-import yougotmail.ai._ai_schemas as schemas
+from yougotmail.ai._ai_tools import AI_TOOLS
 from textwrap import dedent
 
 
 class AIHandler:
-    def __init__(
-        self,
-        open_ai_api_key="",
-        prompt="",
-        prompt_name="",
-        schema_name="",
-        schema="",
-        content="",
-        model="gpt-4.1",
-        reasoning_effort="",
-    ):
+    def __init__(self, open_ai_api_key):
         try:
             from openai import OpenAI
+
             self.client = OpenAI(api_key=open_ai_api_key)
         except ImportError:
-            raise ImportError("OpenAI package is not installed. Install it with 'pip install yougotmail[ai]'")
-        
-        self.prompt = prompt
-        self.prompt_name = prompt_name
-        self.schema_name = schema_name
-        self.schema = schema
-        self.prompts = prompts
-        self.schemas = schemas
-        self.content = content
-        self.model = model
-        self.reasoning_effort = reasoning_effort
+            raise ImportError(
+                "OpenAI package is not installed. Install it with 'pip install yougotmail[openai]'"
+            )
 
-    def main(self):
-        if self.schema == "":
-            schema = getattr(self.schemas, self.schema_name)
-        else:
-            schema = self.schema
+    def _content(self, content):
+        if isinstance(content, dict):
+            content = json.dumps(content)
+        return content
 
-        if self.prompt == "":
-            prompt = getattr(self.prompts, self.prompt_name)
-        else:
-            prompt = self.prompt
+    def text_generation(self, instructions="", prompt="", model="gpt-4.1"):
+        try:
+            response = self.client.responses.create(
+                model=model, instructions=dedent(instructions), input=prompt
+            )
+            return response.output_text
+        except Exception as e:
+            print(f"An error occurred in text_generation: {str(e)}")
 
-        if isinstance(self.content, dict):
-            self.content = json.dumps(self.content)
-
+    def structured_outputs(self, prompt="", schema="", content="", model="gpt-4.1"):
         try:
             completion = self.client.beta.chat.completions.parse(
-                model=self.model,
+                model=model,
                 temperature=0.0,
                 messages=[
                     {"role": "system", "content": dedent(prompt)},
-                    {"role": "user", "content": self.content},
+                    {"role": "user", "content": self._content(content)},
                 ],
                 response_format=schema,
             )
-
-            response_content = json.loads(completion.choices[0].message.content)
-
-            return response_content
-
+            return json.loads(completion.choices[0].message.content)
         except Exception as e:
-            print(
-                f"\033[1;35mError in 3A4BE42D-4C6F-46A2-A2B7-6478A00FF9A2: {str(e)}\033[0m"
-            )
+            print(f"An error occurred in structured_outputs: {str(e)}")
 
-    def completions(self):
-        prompt = getattr(self.prompts, self.prompt_name)
-
-        completion = self.client.chat.completions.create(
-            model=self.model,
-            messages=[
-                {"role": "system", "content": dedent(prompt)},
-                {"role": "user", "content": self.content},
-            ],
-            max_tokens=100,
-        )
-        response_content = completion.choices[0].message.content.strip()
-        print(response_content)
-        return response_content
-
-    def reasoning(self):
+    def reasoning(self, prompt="", reasoning_effort="medium", model="o4-mini"):
         try:
-            response = self.client.chat.completions.create(
-                model=self.model,
-                reasoning_effort=self.reasoning_effort,
-                messages=[{"role": "user", "content": self.content}],
+            response = self.client.responses.create(
+                model=model,
+                reasoning={"effort": f"{reasoning_effort}"},
+                input=[{"role": "user", "content": prompt}],
             )
-            return response.choices[0].message.content
+
+            return response.output_text
         except Exception as e:
             print(f"An error occurred: {e}")
+
+    def process_image(self, prompt="", image_url="", model="gpt-4.1"):
+        try:
+            response = self.client.responses.create(
+                model=model,
+                input=[
+                    {
+                        "role": "user",
+                        "content": [
+                            {"type": "input_text", "text": prompt},
+                            {
+                                "type": "input_image",
+                                "image_url": image_url,
+                            },
+                        ],
+                    }
+                ],
+            )
+            return response.output_text
+        except Exception as e:
+            print(f"An error occurred in process_image: {str(e)}")
+
+    def function_calling(
+        self, instructions="", prompt="", model="gpt-4.1", tools=[], ai_tools=""
+    ):
+        try:
+            # Initialize conversation history
+            conversation_history = [
+                {"role": "developer", "content": dedent(instructions)},
+                {"role": "user", "content": prompt},
+            ]
+
+            while True:
+                response = self.client.responses.create(
+                    model=model, 
+                    input=conversation_history, 
+                    tools=tools, 
+                    tool_choice="auto"
+                )
+                tool_call = response.output[0]
+
+                if tool_call.type == "function_call":
+                    args = json.loads(tool_call.arguments)
+                    result = ai_tools._ai_function_router(tool_call.name, args)
+
+                    conversation_history.append(tool_call)
+                    conversation_history.append(
+                        {
+                            "type": "function_call_output",
+                            "call_id": tool_call.call_id,
+                            "output": str(result),
+                        }
+                    )
+                else:
+                    # Add assistant's response to conversation history
+                    conversation_history.append({
+                        "role": "assistant",
+                        "content": response.output_text
+                    })
+                    
+                    # Display assistant's response to user
+                    print("\nAssistant:", response.output_text)
+                    
+                    # Get user input for continuation
+                    print("\nUser (type 'exit' to end conversation):", end=" ")
+                    user_input = input()
+                    
+                    # Check if user wants to exit
+                    if user_input.lower() == 'exit':
+                        return response.output_text
+                    
+                    # Add user's input to conversation history
+                    conversation_history.append({
+                        "role": "user",
+                        "content": user_input
+                    })
+
+        except Exception as e:
+            print(f"An error occurred in function_calling: {e}")
+            raise

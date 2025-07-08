@@ -27,33 +27,27 @@ class RetrieveConversations:
         self.token = self.utils._generate_MS_graph_token(
             client_id, client_secret, tenant_id
         )
-        
+
         # Store storage configuration but don't initialize yet
         self._storage_config = {
-            'mongo_url': mongo_url,
-            'mongo_db_name': mongo_db_name,
-            'email_collection': email_collection,
-            'conversation_collection': conversation_collection,
-            'attachment_collection': attachment_collection,
-            'aws_access_key_id': aws_access_key_id,
-            'aws_secret_access_key': aws_secret_access_key,
-            'region_name': region_name,
-            'bucket_name': bucket_name,
+            "mongo_url": mongo_url,
+            "mongo_db_name": mongo_db_name,
+            "email_collection": email_collection,
+            "conversation_collection": conversation_collection,
+            "attachment_collection": attachment_collection,
+            "aws_access_key_id": aws_access_key_id,
+            "aws_secret_access_key": aws_secret_access_key,
+            "region_name": region_name,
+            "bucket_name": bucket_name,
         }
         self._db_storage = None
-        
+
         # Initialize other components with the same config
         self.retrieve_emails = RetrieveEmails(
-            client_id,
-            client_secret,
-            tenant_id,
-            **self._storage_config
+            client_id, client_secret, tenant_id, **self._storage_config
         )
         self.retrieve_attachments = RetrieveAttachments(
-            client_id,
-            client_secret,
-            tenant_id,
-            **self._storage_config
+            client_id, client_secret, tenant_id, **self._storage_config
         )
         self.retrieval_utils = RetrievalUtils(client_id, client_secret, tenant_id)
 
@@ -61,6 +55,7 @@ class RetrieveConversations:
         """Lazy initialization of storage"""
         if self._db_storage is None:
             from yougotmail.storage.storage import Storage
+
             self._db_storage = Storage(**self._storage_config)
         return self._db_storage
 
@@ -95,7 +90,7 @@ class RetrieveConversations:
 
             # get all messages fitting criteria
             emails_matching_conversation_filters = (
-                self.retrieve_emails._get_emails_from_one_inbox(
+                self.retrieve_emails._get_emails_from_one_inbox_without_print(
                     inbox=inbox,
                     range=range,
                     start_date=start_date,
@@ -154,11 +149,20 @@ class RetrieveConversations:
                 print(
                     f"More than one conversation found in inbox {inbox} for the given filters."
                 )
-                conversations_found_info = {
-                    "number_of_conversations": number_of_conversations,
-                    "conversations": unique_conversations,
-                }
-                print(conversations_found_info)
+
+                print(
+                    f"Found {number_of_conversations} conversations. Narrow down your search by providing more filters or using the conversation_id parameter."
+                )
+                print(f"Conversations found:")
+                conversation_count = 0
+                for conv in unique_conversations:
+                    conversation_count += 1
+                    print(
+                        f"{conversation_count}. Conversation ID: {conv['conversation_id']}"
+                    )
+                    print(f"   Subject: {conv['subject']}")
+                    print(f"   Sender: {conv['sender']}")
+                    print("--------------------------------")
                 return None
             else:
                 print(f"No conversation found in inbox {inbox} for the given filters")
@@ -222,7 +226,6 @@ class RetrieveConversations:
                 f"isDraft eq false&"
                 f"$select=from,conversationId,hasAttachments,receivedDateTime,subject,toRecipients,ccRecipients,bccRecipients,uniqueBody,body,parentFolderId"
             )
-            print(f"\033[1;35m{url_filter}\033[0m")
             url = (
                 f"https://graph.microsoft.com/v1.0/users/{inbox}/messages?{url_filter}"
             )
@@ -263,15 +266,17 @@ class RetrieveConversations:
                         )
                         if filtered_email is not None:
                             email_count += 1
-                            print_result = {
-                                "count": email_count,
-                                "inbox": inbox,
-                                "sender": filtered_email.get("sender_address"),
-                                "subject": filtered_email.get("subject"),
-                                "datetime": filtered_email.get("received_date"),
-                                "folder": filtered_email.get("folder_name"),
-                            }
-                            print(print_result)
+                            print(f"\nEmail {email_count} in {inbox}:")
+                            print(f"  Inbox:     {inbox}")
+                            print(
+                                f"  From:      {filtered_email.get('sender_address')}"
+                            )
+                            print(f"  Subject:   {filtered_email.get('subject')}")
+                            print(f"  Date:      {filtered_email.get('received_date')}")
+                            print(f"  Folder:    {filtered_email.get('folder_name')}")
+                            print(
+                                f"  Attachments: {len(filtered_email.get('attachments', []))}"
+                            )
                             emails_list.append(filtered_email)
                     url = next_page_link
 
@@ -305,12 +310,14 @@ class RetrieveConversations:
                 "emails": emails_list,
             }
 
-            if storage in ['emails', 'emails_and_attachments']:
+            if storage in ["emails", "emails_and_attachments"]:
                 storage_instance = self._ensure_storage()
-                if storage == 'emails':
+                if storage == "emails":
                     storage_instance.store_conversation(conversation_object)
                 else:
-                    storage_instance.store_conversation_and_attachments(conversation_object)
+                    storage_instance.store_conversation_and_attachments(
+                        conversation_object
+                    )
                 conversation_object = self.utils._convert_datetimes(
                     self.utils._remove_objectid_from_list(conversation_object)
                 )
