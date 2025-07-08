@@ -3,10 +3,9 @@ __pycache__/
 .pytest_cache/
 agent_1_personal_assistant/
 agent_2_digital_co_worker/
-_subscription.py
-_webhook.json
 .env
-webhook_renewal/
+webhook_renewal/dependencies
+webhook_renewal/deployment.zip
 emails.json
 emails_structured_output.json
 yougotmail.egg-info
