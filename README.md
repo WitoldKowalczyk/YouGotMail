@@ -1,13 +1,13 @@
 ![cover_image](public/cover_image.png)
 
-# You've Got Mail - build digital co-workers in MS Outlook
+# YouGotMail - build digital co-workers in MS Outlook
 
 ## 📝 TL;DR 
 
 ### 🤖 What 
 - 🤖 easy-to-use library for retrieving and sending emails with MS Outlook's API
 - 🤖 AI tools to automate retrieval and sending of emails
-- 📨 walkthrough + tools to build digital co-workers: spin up an AI agent running an inbox inside AWS Lambda
+- 📨 walkthrough + tools to build digital co-workers: spin up an AI agent running an inbox inside AWS Lambda (work in progress)
 
 ### 📦 Stack 
 - 🐍 Python
@@ -23,8 +23,8 @@
 
 ### *Note on version and tested/untested features*
 - *status: all methods listed below are (or should be) working. However I haven't had time to unit test them and write proper error handling. The docs below outline which methods have been tested and which haven't. I will be updating the version and status over the upcoming weeks*
-- *current version: 0.0.12*
-- *last update: 2025-07-08*
+- *current version: 0.0.13*
+- *last update: 2025-07-09*
 
 ## 🚀 Quickstart 
 
@@ -52,27 +52,25 @@ emails = ygm.get_emails(
 )
 
 print(emails)
-
-"""
-Possible time ranges are
-- previous_year (year before the the current year, e.g. 2024 if the current year is 2025)
-- previous_month
-- previous_week
-- previous_day
-
-- last_365_days (last 365 days until the current date)
-- last_30_days
-- last_7_days
-- last_24_hours
-- last_12_hours
-- last_8_hours
-- last_hour
-- last_30_minutes
-- last_hour
-- last_30_minutes
-"""
-
 ```
+
+Possible time ranges are:
+
+| Time Range | Description |
+|------------|-------------|
+| `previous_year` | full previous year before the current year (e.g. 2024 if current year is 2025) |
+| `previous_month` | full previous month (e.g. June 2025 if current month is July 2025) |
+| `previous_week` | full previous week |
+| `previous_day` | full previous day |
+| `last_365_days` | last 365 days until current date |
+| `last_30_days` | last 30 days until current date |
+| `last_7_days` | last 7 days until current date |
+| `last_24_hours` | Last 24 hours until current time |
+| `last_12_hours` | Last 12 hours until current time |
+| `last_8_hours` | Last 8 hours until current time |
+| `last_hour` | Last hour until current time |
+| `last_30_minutes` | Last 30 minutes until current time |
+
 ## 📑 Table of Contents
 
 - [📖 Introduction](#-introduction)
@@ -89,6 +87,7 @@ Possible time ranges are
 - [📨 Retrieving Emails](#retrieving-emails)
   - [Retrieving Emails](#retrieving-emails)
   - [Retrieving Conversations](#retrieving-conversations)
+  - [Retrieving Only Attachments](#retrieving-only-attachments)
 - [📤 Sending Emails](#sending-emails)
   - [Send emails](#send-emails)
 - [📧 Email Operations](#email-operations)
@@ -294,57 +293,78 @@ ygm = YouGotMail(
 inbox_list = ["yougotmail@outlook.com", "yougotmail2@outlook.com"] # the email address of the inbox on which you will be operating
 
 emails = ygm.get_emails(
-    inbox=inbox_list, # list of inboxes from which you're retrieving email, you can retrieve from multiple tenants at once
-    range="last_7_days", # can be any of the following: previous_year, previous_month, previous_week, previous_day, last_365_days, last_30_days, last_7_days, last_24_hours, last_12_hours, last_8_hours, last_hour, last_30_minutes, last_hour, last_30_minutes
-    start_date="2025-06-01",  # can be date: YYYY-MM-DD Note: you can't use both range and start_date/end_date
-    start_time="00:00:00", # time in 00:00:00, all time is UTC
-    end_date="2025-06-03",  # can be date: YYYY-MM-DD 
-    end_time="14:00:00", # time in 00:00:00, all time is UTC
-    subject=["keyword1", "keyword2"], # list of subjects to filter by - this will return all emails that contain keyword1 in the subject line as well as all emails with keyword2
-    sender_name=[], # list of sender names to filter by - returns all emails for each sender name
-    sender_address=[], # list of sender addresses to filter by - returns all emails for each sender address
-    recipients=[], # list of recipients to filter by - returns all emails for all recipients listed
-    cc=[], # list of cc recipients to filter by - returns all emails for all cc recipients listed
-    bcc=[], # list of bcc recipients to filter by - returns all emails for all bcc recipients listed
-    folder_path="", # a folder path for retrieving emails from a specific folder or sub-folder - e.g. "Documents/Invoices/Carriers"
-    drafts=False, # True/False, if True it returns all drafts
-    archived=False, # True/False/"all", if True it returns only archived emails, False does not return them, "all" returns both archived and non archived
-    deleted=False, # True/False/"all", if True it returns only deleted emails, False does not return them, "all" returns both deleted and non deleted
-    sent=False, # True/False/"all", if True it returns only sent emails, False does not return them, "all" returns both sent and received
-    read="all", # "all", "read", "unread", if "all" it returns both read and unread emails, if "read" it returns only read emails, if "unread" it returns only unread emails
-    attachments=True, # True/False, if True it returns all attachments
-    storage=None, # None, "emails", "emails_and_attachments", if "emails" it stores only emails, if "emails_and_attachments" it will store both emails and attachments | requires MongoDB and AWS credentials (see below)
+    inbox=inbox_list, 
+    range="",
+    start_date="",
+    start_time="",
+    end_date="",
+    end_time="",
+    subject=[],
+    sender_name=[],
+    sender_address=[],
+    recipients=[],
+    cc=[],
+    bcc=[],
+    folder_path="",
+    drafts=False,
+    archived=False,
+    deleted=False, 
+    sent=False, 
+    read="all", 
+    attachments=True,
+    storage=None
 )
-
 ```
+
+| Parameter | Required | Type | Description/Options |
+|-----------|----------|------|-------------|
+| `inbox` | Yes | list | List of inboxes from which you're retrieving email, you can retrieve from multiple tenants at once |
+| `range` | No | string | Time range to filter by (e.g. previous_year, previous_month, previous_week, etc.) |
+| `start_date` | No | string | Start date in YYYY-MM-DD format. Note: can't use with range |
+| `start_time` | No | string | Start time in 00:00:00 format (UTC) |
+| `end_date` | No | string | End date in YYYY-MM-DD format |
+| `end_time` | No | string | End time in 00:00:00 format (UTC) |
+| `subject` | No | list | List of subject keywords to filter by |
+| `sender_name` | No | list | List of sender names to filter by |
+| `sender_address` | No | list | List of sender email addresses to filter by |
+| `recipients` | No | list | List of recipient email addresses to filter by |
+| `cc` | No | list | List of CC recipient email addresses to filter by |
+| `bcc` | No | list | List of BCC recipient email addresses to filter by |
+| `folder_path` | No | string | Folder path to retrieve emails from (e.g. "Documents/Invoices/Carriers") |
+| `drafts` | No | boolean | If True, returns only draft emails |
+| `archived` | No | string/boolean | True for archived only, False for non-archived, "all" for both |
+| `deleted` | No | string/boolean | True for deleted only, False for non-deleted, "all" for both |
+| `sent` | No | string/boolean | True for sent only, False for received only, "all" for both |
+| `read` | No | string | "all", "read", or "unread" to filter by read status |
+| `attachments` | No | boolean | If True, includes attachments in response |
+| `storage` | No | string | None, "emails", or "emails_and_attachments". Requires MongoDB and AWS credentials |
+
 
 This query should return a list of emails that looks like this for each inbox query:
 
 ```json
 {
-        "inbox": "example@example.com", // the address of the inbox
-        "number_of_emails_found": 22, // the number of emails found in the inbox
+        "inbox": "example@example.com",
+        "number_of_emails_found": 22, 
         "emails": [
             {
                 "email_id": "ms_outlook_assigned_email_id_of_the_email",
-                "received_date": "2025-07-08T04:23:00Z", // date time of the email
-                "folder_name": "Inbox", // the folder the email is in
-                "sender_name": "John Doe", // the name of the sender
-                "sender_address": "john.doe@example.com", // the email address of the sender
-                "conversation_id": "conversation_id_of_the_email", // the id of the conversation the email is part of
+                "received_date": "2025-07-08T04:23:00Z", 
+                "folder_name": "Inbox", 
+                "sender_name": "John Doe", 
+                "sender_address": "john.doe@example.com", 
+                "conversation_id": "conversation_id_of_the_email", 
                 "recipients": [
                     {
                         "recipient_name": "Jane Doe",
                         "recipient_address": "jane.doe@example.com"
                     }
-                    // ... list of all recipients
                 ],
                 "cc": [
                     {
                         "cc_recipient_name": "John Doe",
                         "cc_recipient_address": "john.doe@example.com"
                     }
-                    // ... list of all cc recipients
                 ],
                 "bcc": [],
                 "subject": "The subject of the email",
@@ -352,14 +372,13 @@ This query should return a list of emails that looks like this for each inbox qu
                 "attachments": [
                     {
                         "attachment_id": "ms_outlook_assigned_attachment_id_of_the_attachment",
-                        "file_name": "example_name.pdf", // the name of the attachment
-                        "date": "2025-07-08T04:23:00Z", // the date the attachment was added to the email
-                        "contentType": "application/octet-stream", // the type of the attachment
-                        "contentBytes": "JVBERi0xLj...." // long base64 string 
+                        "file_name": "example_name.pdf", 
+                        "date": "2025-07-08T04:23:00Z", 
+                        "contentType": "application/octet-stream", 
+                        "contentBytes": "JVBERi0xLj...." 
                     }
                 ]
             }
-            // ... list of all emails
         ]
     }
 
@@ -414,25 +433,24 @@ The retrieved conversation should look like this:
 {
     "inbox": "example@example.com",
     "conversation_id": "conversation_id_of_the_conversation",
-    "number_of_emails_found": 1, // the number of emails in the conversation
+    "number_of_emails_found": 1, 
     "emails": [
         {
-            "received_date": "2025-07-08T04:57:10Z", // the date the email was received
-            "folder_name": "Inbox", // the folder the email is in
-            "sender_name": "John Doe", // the name of the sender
-            "sender_address": "john.doe@example.com", // the email address of the sender
+            "received_date": "2025-07-08T04:57:10Z", 
+            "folder_name": "Inbox", 
+            "sender_name": "John Doe", 
+            "sender_address": "john.doe@example.com", 
             "recipients": [
                 {
                     "recipient_name": "Jane Doe",
                     "recipient_address": "jane.doe@example.com"
                 }
-                // ... list of all recipients
             ],
             "cc": [],
             "bcc": [],
-            "subject": "The subject of the email", // the subject of the email
-            "body": "The body of the email", // the body of the email
-            "attachments": [] // list of attachments
+            "subject": "The subject of the email", 
+            "body": "The body of the email", 
+            "attachments": [] 
         }
     ]
 }
@@ -457,6 +475,65 @@ conversation = ygm.get_conversation(
 )
 ```
 
+## Retrieving Only Attachments
+
+If for whatever reason you only want to retrieve attachments and not emails, you can use the get_attachments() method to do so.
+```python
+inbox = "yougotmail@outlook.com" # the email address of the inbox on which you will be operating
+
+ygm = YouGotMail(
+    client_id="MS_CLIENT_ID",
+    client_secret="MS_CLIENT_SECRET",
+    tenant_id="MS_TENANT_ID"
+)
+
+inbox_list = ["yougotmail@outlook.com", "yougotmail2@outlook.com"] # the email address of the inbox on which you will be operating
+
+attachments = ygm.get_attachments(
+        inbox=[],
+        range="",
+        start_date="",  # can be date: YYYY-MM-DD or datetime YYYY-MM-DDT00:00:00Z
+        start_time="",
+        end_date="",  # can be date: YYYY-MM-DD or datetime YYYY-MM-DDT00:00:00Z
+        end_time="",
+        subject=[],
+        sender_name=[],
+        sender_address=[],
+        recipients=[],
+        cc=[],
+        bcc=[],
+        folder_path=[],
+        drafts=False,
+        archived=False,
+        deleted=False,
+        sent=False,
+        read="all",
+        storage=None,
+    ):
+```
+
+We apply here the same filters as the get_emails() method. The difference is that we only retrieve attachments and not emails.
+
+The query should return a list of attachments that looks like this:
+
+```json
+[
+    {
+        "inbox": "",  
+        "number_of_attachments_found": "",
+        "attachments": [  
+            {
+                "inbox": "",  
+                "sender_address": "",
+                "file_name": "",  
+                "date": "",  
+                "contentType": "",  
+                "contentBytes": ""  
+            },
+        ]
+    }
+]
+```
 
 ## Sending emails
 
@@ -478,7 +555,7 @@ draft_email = ygm.draft_email(
     to_recipients=["recipient@example.com", "recipient2@example.com"],
     cc_recipients=["cc@example.com"],
     bcc_recipients=["bcc@example.com"],
-    attachments=["https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png"], # You can pass a URL (make sure it's accessible) or a local file path
+    attachments=["https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png"]
     )
 
 print(draft_email)
@@ -676,7 +753,7 @@ You will get a response like this:
 }
 ```
 
-### Renewing Subscriptions
+### Renewing webhook subscriptions
 
 You can renew all subscriptions for an inbox by running this code. The renewal is set to work if you run it within 24 hours before the subscription expires. It will then renew the subscription for an extra 3 days (from the date the subscription was originally set to expire). You can run as a daily cron job to renew the subscriptions automatically.
 
@@ -686,7 +763,7 @@ renew_subscriptions = ygm.renew_subscriptions(inbox="user@example.com")
 
 For an example of how to run this code in AWS Lambda to renew the subscriptions automatically, see the [webhook_renewal/README.md](webhook_renewal/README.md) file.
 
-### Deleting a Subscription
+### Deleting a webhook subscription
 
 If you want to delete a subscription you can do so by running this code. You will need the subscription id that you can obtain from the `get_active_subscriptions_for_inbox()` method.
 

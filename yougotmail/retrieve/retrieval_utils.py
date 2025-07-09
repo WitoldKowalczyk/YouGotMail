@@ -339,7 +339,7 @@ class RetrievalUtils:
         return url_filter
 
     def _filter_email_outputs(self, email, archived=False, deleted=False, sent=False):
-        email_folder_name = email.get("folder_name")
+        email_folder_name = email.get("folder_name", "")
 
         if archived == "all":
             pass

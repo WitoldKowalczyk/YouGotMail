@@ -11,7 +11,7 @@ class AIHandler:
             self.client = OpenAI(api_key=open_ai_api_key)
         except ImportError:
             raise ImportError(
-                "OpenAI package is not installed. Install it with 'pip install yougotmail[openai]'"
+                "OpenAI package is not installed. Install it with pip install 'yougotmail[openai]'"
             )
 
     def _content(self, content):
@@ -88,10 +88,10 @@ class AIHandler:
 
             while True:
                 response = self.client.responses.create(
-                    model=model, 
-                    input=conversation_history, 
-                    tools=tools, 
-                    tool_choice="auto"
+                    model=model,
+                    input=conversation_history,
+                    tools=tools,
+                    tool_choice="auto",
                 )
                 tool_call = response.output[0]
 
@@ -109,27 +109,23 @@ class AIHandler:
                     )
                 else:
                     # Add assistant's response to conversation history
-                    conversation_history.append({
-                        "role": "assistant",
-                        "content": response.output_text
-                    })
-                    
+                    conversation_history.append(
+                        {"role": "assistant", "content": response.output_text}
+                    )
+
                     # Display assistant's response to user
                     print("\nAssistant:", response.output_text)
-                    
+
                     # Get user input for continuation
                     print("\nUser (type 'exit' to end conversation):", end=" ")
                     user_input = input()
-                    
+
                     # Check if user wants to exit
-                    if user_input.lower() == 'exit':
+                    if user_input.lower() == "exit":
                         return response.output_text
-                    
+
                     # Add user's input to conversation history
-                    conversation_history.append({
-                        "role": "user",
-                        "content": user_input
-                    })
+                    conversation_history.append({"role": "user", "content": user_input})
 
         except Exception as e:
             print(f"An error occurred in function_calling: {e}")

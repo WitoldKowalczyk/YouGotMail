@@ -70,3 +70,7 @@ All notable changes to this project will be documented in this file.
 ## [0.0.12] - 2025-07-08
 ### Added
 - minor fixes
+
+## [0.0.13] - 2025-07-09
+### Changed
+- re-factored Ai structured outputs from email

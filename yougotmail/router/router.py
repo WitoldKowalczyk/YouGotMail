@@ -11,6 +11,7 @@ from yougotmail._utils._validation import (
     ValidationError,
 )
 
+
 class YouGotMail:
     def __init__(
         self,
@@ -36,6 +37,7 @@ class YouGotMail:
             client_id,
             client_secret,
             tenant_id,
+            open_ai_api_key=open_ai_api_key,
             mongo_url=mongo_url,
             mongo_db_name=mongo_db_name,
             email_collection=email_collection,
@@ -181,7 +183,7 @@ class YouGotMail:
         sender_address="",
         read="all",
         attachments=False,
-        storage=None
+        storage=None,
     ):
         return self.retrieve_conversations.get_conversation(
             inbox=inbox,
@@ -342,14 +344,14 @@ class YouGotMail:
         storage=None,
         schema={}
     ):
-        ai = self._get_ai()
+        # ai = self._get_ai()
         # Add custom validation logic specific to this function
         if range and (start_date or end_date or start_time or end_time):
             raise ValidationError(
                 "Cannot specify both 'range' and custom date/time parameters"
             )
 
-        return ai.ai_get_emails_with_structured_output(
+        return self.retrieve_emails.get_emails_with_structured_outputs(
             inbox=inbox,
             range=range,
             start_date=start_date,
@@ -373,7 +375,7 @@ class YouGotMail:
             schema=schema,
         )
 
-    def ai_agent_with_tools(self, inbox,prompt):
+    def ai_agent_with_tools(self, inbox, prompt):
         ai = self._get_ai()
         return ai.ai_agent_with_tools(inbox=inbox, prompt=prompt)
 

@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="yougotmail",
-    version="0.0.12",
+    version="0.0.13",
     description="Easily create AI Agents in MS Outlook",
     long_description=open("README.md", encoding="utf-8").read(),
     long_description_content_type="text/markdown",

@@ -22,8 +22,8 @@ TOOLS = [
                     "description": "Email address of the recipient",
                     "items": {
                         "type": "string",
-                    }
-                }
+                    },
+                },
             },
             "required": ["subject", "email_body", "to_recipients"],
             "additionalProperties": False,
@@ -39,7 +39,9 @@ class AI_TOOLS:
 
     def _ai_function_router(self, name, args):
         if name == "send_email":
-            return self.send_email(args["subject"], args["email_body"], args["to_recipients"])
+            return self.send_email(
+                args["subject"], args["email_body"], args["to_recipients"]
+            )
         else:
             return "Function not found"
 
@@ -48,7 +50,7 @@ class AI_TOOLS:
             inbox=self.inbox,
             subject=subject,
             email_body=email_body,
-            to_recipients=to_recipients
+            to_recipients=to_recipients,
         )
         print(f"Email sent: {response}")
         return response
