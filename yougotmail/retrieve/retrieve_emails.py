@@ -343,7 +343,6 @@ class RetrieveEmails:
             try:
                 emails_list = []
                 page_count = 0
-                email_count = 0
                 while url and page_count < 100000:
                     page_count += 1
                     response = requests.get(url, headers=headers)

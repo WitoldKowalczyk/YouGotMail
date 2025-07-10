@@ -3,7 +3,7 @@ import base64
 from yougotmail._utils._utils import Utils
 from yougotmail.send.send import Send
 import os
-from urllib.parse import urlparse, unquote, quote
+from urllib.parse import urlparse, unquote
 import json
 
 

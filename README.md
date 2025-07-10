@@ -102,7 +102,7 @@ Possible time ranges are:
 Microsoft Outlook is one of the most popular email clients among enterprises and business users.
 In some roles - handling email is almost the entire job. People receive emails, extract data from them, pass that data to other systems, retrieve data from those systems and send it via email. And so it goes.
 
-Hence, building AI solutions that can 
+Hence, if you're building meaningful AI agents, you need to integrate with email. If you do it for the enterprise, you need to integrate with MS Outlook.
 
 Furthermore, emails are a natural communication method that humans know and use daily.
 Creating AI Agents that can live in an email environment offers a natural way of interacting with AI systems. For example an AI CC'd into a conversation could easily perform tasks that the parties of the email thread want handled.

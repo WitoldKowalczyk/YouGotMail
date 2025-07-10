@@ -153,7 +153,7 @@ class RetrieveConversations:
                 print(
                     f"Found {number_of_conversations} conversations. Narrow down your search by providing more filters or using the conversation_id parameter."
                 )
-                print(f"Conversations found:")
+                print("Conversations found:")
                 conversation_count = 0
                 for conv in unique_conversations:
                     conversation_count += 1
