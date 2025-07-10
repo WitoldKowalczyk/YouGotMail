@@ -4,6 +4,7 @@ from yougotmail.retrieve.retrieve_conversations import RetrieveConversations
 from yougotmail.retrieve.retrieve_attachments import RetrieveAttachments
 from yougotmail.send.send import Send
 from yougotmail.send.reply import Reply
+from yougotmail.move.move_delete import MoveDelete
 from yougotmail._utils._ms_webhook import MSWebhook
 from yougotmail._utils._validation import (
     validate_inputs,
@@ -91,6 +92,7 @@ class YouGotMail:
             bucket_name=bucket_name,
         )
         self.reply = Reply(client_id, client_secret, tenant_id)
+        self.move_delete = MoveDelete(client_id, client_secret, tenant_id)
         # Store credentials for lazy AI initialization
         self._ai_credentials = {
             "client_id": client_id,
@@ -342,7 +344,8 @@ class YouGotMail:
         read="all",
         attachments=True,
         storage=None,
-        schema={}
+        schema={},
+        instructions=""
     ):
         # ai = self._get_ai()
         # Add custom validation logic specific to this function
@@ -373,6 +376,7 @@ class YouGotMail:
             attachments=attachments,
             storage=storage,
             schema=schema,
+            instructions=instructions
         )
 
     def ai_agent_with_tools(self, inbox, prompt):
@@ -392,3 +396,44 @@ class YouGotMail:
 
     def renew_subscriptions(self, inbox):
         return self.ms_webhook.renew_subscriptions(inbox)
+
+    def move_email_to_folder(self, inbox="", email_id="", folder_path=""):
+        return self.move_delete.move_email_to_folder(inbox, email_id, folder_path)
+
+    def delete_email(self, inbox="", email_id=""):
+        return self.move_delete.delete_email(inbox, email_id)
+
+    def delete_conversation_by_id(self, inbox="", conversation_id=""):
+        return self.move_delete.delete_conversation_by_id(inbox, conversation_id)
+
+    def delete_conversation(
+        self,
+        inbox="",
+        conversation_id="",
+        range="last_24_hours",
+        start_date="",
+        start_time="",
+        end_date="",
+        end_time="",
+        subject="",
+        sender_name="",
+        sender_address="",
+        read="all",
+        attachments=False,
+        storage=None,
+    ):
+        return self.move_delete.delete_conversation(
+            inbox,
+            conversation_id,
+            range,
+            start_date,
+            start_time,
+            end_date,
+            end_time,
+            subject,
+            sender_name,
+            sender_address,
+            read,
+            attachments,
+            storage,
+        )

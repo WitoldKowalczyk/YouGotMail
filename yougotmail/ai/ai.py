@@ -29,7 +29,7 @@ class AI:
             )
 
     def ai_structured_output_from_email_body(
-        self, *, email_body: str, schema: Dict[str, Any]
+        self, *, instructions: str, email_body: str, schema: Dict[str, Any]
     ):
         ai_handler = self._ensure_ai_handler()
         schema = {
@@ -53,7 +53,7 @@ class AI:
             """
 
         return ai_handler.structured_outputs(
-            prompt=f"Extract the following information from the email: {schema}",
+            prompt=f"Extract the following information from the email using the following instructions: {instructions}. Provide the output in the following schema: {schema}",
             schema=schema,
             content=content_for_ai,
             model="gpt-4.1",

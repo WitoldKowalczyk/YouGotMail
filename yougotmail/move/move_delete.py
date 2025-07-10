@@ -21,19 +21,55 @@ class MoveDelete:
         headers = {"Authorization": f"Bearer {self.token}"}
         data = {"destinationId": folder_id}
         response = requests.post(url, headers=headers, json=data)
-        return response.json()
+        if response.status_code in [200, 201]:
+            return {
+                "status": "success", 
+                "message": "Email moved to folder ✨",
+                "email_id": email_id,
+                "sender_name": response.json()["sender"]["emailAddress"]["name"],
+                "subject": response.json()["subject"],
+                "folder_path": folder_path
+            }
+        else:
+            return {
+                "status": "error",
+                "message": "Failed to move email to folder ❌",
+                "error": response.text
+            }
 
     def delete_email(self, inbox="", email_id=""):
         url = f"https://graph.microsoft.com/v1.0/users/{inbox}/messages/{email_id}"
         headers = {"Authorization": f"Bearer {self.token}"}
         response = requests.delete(url, headers=headers)
-        return response.json()
+        if response.status_code in [200, 204]:
+            return {
+                "status": "success",
+                "message": "Email deleted ✨",
+                "email_id": email_id
+            }
+        else:
+            return {
+                "status": "error",
+                "message": "Failed to delete email ❌",
+                "error": response.text
+            }
 
     def delete_conversation_by_id(self, inbox="", conversation_id=""):
         url = f"https://graph.microsoft.com/v1.0/users/{inbox}/conversations/{conversation_id}"
         headers = {"Authorization": f"Bearer {self.token}"}
         response = requests.delete(url, headers=headers)
-        return response.json()
+        if response.status_code in [200, 204]:
+            return {
+                "status": "success",
+                "message": "Conversation deleted ✨",
+                "conversation_id": conversation_id
+            }
+        else:
+            return {
+                "status": "error",
+                "message": "Failed to delete conversation ❌",
+                "error": response.text
+            }
 
     def delete_conversation(
         self,

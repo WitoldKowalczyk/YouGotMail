@@ -23,8 +23,8 @@
 
 ### *Note on version and tested/untested features*
 - *status: all methods listed below are (or should be) working. However I haven't had time to unit test them and write proper error handling. The docs below outline which methods have been tested and which haven't. I will be updating the version and status over the upcoming weeks*
-- *current version: 0.0.13*
-- *last update: 2025-07-09*
+- *current version: 0.0.14*
+- *last update: 2025-07-10*
 
 ## 🚀 Quickstart 
 
@@ -85,14 +85,16 @@ Possible time ranges are:
 - [🤖 Quickstart #2: Structured Outputs from emails with OpenAI](#quickstart-2-structured-outputs-from-emails-with-openai)
 - [📤 Quickstart #3: Sending emails](#quickstart-3-sending-emails)
 - [📨 Retrieving Emails](#retrieving-emails)
-  - [Retrieving Emails](#retrieving-emails)
-  - [Retrieving Conversations](#retrieving-conversations)
-  - [Retrieving Only Attachments](#retrieving-only-attachments)
+- [Retrieving Conversations](#retrieving-conversations)
+- [Retrieving Only Attachments](#retrieving-only-attachments)
 - [📤 Sending Emails](#sending-emails)
-  - [Send emails](#send-emails)
-- [📧 Email Operations](#email-operations)
+  - [Draft emails](#draft-emails)
   - [Send emails](#send-emails)
   - [Reply to emails](#reply-to-emails)
+- [Move and Delete Operations](#move-and-delete-operations)
+  - [Move Email to Folder](#move-email-to-folder)
+  - [Delete Email](#delete-email)
+  - [Delete Conversation](#delete-conversation)
 - [🗄️ Storage](#storage)
   - [Note on dependencies needed for storage](#note-on-dependencies-needed-for-storage)
   - [Local deployment example](#local-deployment-example)
@@ -227,7 +229,8 @@ emails = ygm.ai_get_emails_with_structured_output(
             "description": "The topic of the email"
             },
         "sentiment": {"type": "string", "description": "what was the mood of the email"}
-        }
+        },
+    instructions="Extract the topic and sentiment of the email" # instructions for the AI to follow
         )
 
 print(emails)
@@ -603,7 +606,64 @@ def test_replying_to_email():
         print(f"Error: {e}")
 ```
 
+## Move and Delete Operations
 
+⚠️ Those methods are not fully tested yet.
+
+### Move Email to Folder
+```python
+result = ygm.move_email_to_folder(
+    inbox="user@example.com",
+    email_id="email_12345", # the email ID from a previous get_emails() call
+    folder_path="Archive/2025" # the path to the destination folder, no need to include Inbox at the beginning
+)
+```
+
+This will move an email to a specified folder and return a response like:
+```json
+{
+    "status": "success",
+    "message": "Email moved to folder ✨",
+    "email_id": "email_12345",
+    "sender_name": "John Doe",
+    "subject": "Meeting Notes",
+    "folder_path": "Archive/2025"
+}
+```
+
+### Delete Email
+```python
+result = ygm.delete_email(
+    inbox="user@example.com",
+    email_id="email_12345" # the email ID from a previous get_emails() call
+)
+```
+
+This will permanently delete an email and return a response like:
+```json
+{
+    "status": "success",
+    "message": "Email deleted ✨",
+    "email_id": "email_12345"
+}
+```
+
+### Delete Conversation
+```python
+result = ygm.delete_conversation_by_id(
+    inbox="user@example.com",
+    conversation_id="conversation_12345" # the conversation ID from a previous get_conversation() call
+)
+```
+
+This will permanently delete an entire conversation thread and return a response like:
+```json
+{
+    "status": "success",
+    "message": "Conversation deleted ✨",
+    "conversation_id": "conversation_12345"
+}
+```
 
 ## Storage
 

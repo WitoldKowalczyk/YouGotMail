@@ -437,6 +437,7 @@ class RetrieveEmails:
         attachments,
         storage,
         schema,
+        instructions
     ):
         try:
             inboxes_list = []
@@ -490,6 +491,7 @@ class RetrieveEmails:
                         read,
                         attachments,
                         schema,
+                        instructions
                     )
                 )
                 if emails_from_one_inbox is not None:
@@ -535,6 +537,7 @@ class RetrieveEmails:
         read,
         attachments,
         schema,
+        instructions
     ):
         try:
             ai = self._get_ai()
@@ -595,7 +598,7 @@ class RetrieveEmails:
                         if filtered_email is not None:
                             filtered_email["structured_output"] = (
                                 ai.ai_structured_output_from_email_body(
-                                    email_body=filtered_email.get("body"), schema=schema
+                                    instructions=instructions, email_body=filtered_email.get("body"), schema=schema
                                 )
                             )
                             email_count += 1

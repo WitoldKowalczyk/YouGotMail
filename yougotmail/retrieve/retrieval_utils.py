@@ -157,12 +157,12 @@ class RetrievalUtils:
         sender_address = from_field.get("address", "")
 
         return {
-            "email_id": "email_" + email["id"],
+            "email_id": email["id"],
             "received_date": email["receivedDateTime"],
             "folder_name": self._get_folder_name(email["parentFolderId"], inbox),
             "sender_name": sender_name,
             "sender_address": sender_address,
-            "conversation_id": "conversation_" + email["conversationId"],
+            "conversation_id": email["conversationId"],
             "recipients": [
                 {
                     "recipient_name": recipient["emailAddress"]["name"],

@@ -74,3 +74,12 @@ All notable changes to this project will be documented in this file.
 ## [0.0.13] - 2025-07-09
 ### Changed
 - re-factored Ai structured outputs from email
+
+## [0.0.14] - 2025-07-10
+### Added
+- `move_email_to_folder()` method for moving emails to folders.
+- `delete_email()` method for deleting emails.
+- `delete_conversation_by_id()` method for deleting conversations by ID.
+- `delete_conversation()` method for deleting conversations.
+### Updated
+- `ai_get_emails_with_structured_output()` method can now take user instructions.
