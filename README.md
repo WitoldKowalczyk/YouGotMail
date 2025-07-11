@@ -570,11 +570,11 @@ print(draft_email)
 def test_sending_emails():
     try:
         send_email = ygm.send_email(
-            inbox=os.environ.get("INBOX_1"),
+            inbox="yougotmail@outlook.com",
             subject="test",
             importance="",
             email_body="<html><body><h1>Test Email</h1><p>This is a test email sent from YouGotMail.</p></body></html>",
-            to_recipients=[os.environ.get("INBOX_1")],
+            to_recipients=["recipient@example.com", "recipient2@example.com"],
             cc_recipients=[],
             bcc_recipients=[],
             attachments=[
@@ -593,8 +593,8 @@ def test_sending_emails():
 def test_replying_to_email():
     try:
         reply_to_email = ygm.reply_to_email(
-            inbox=os.environ.get("INBOX_1"),
-            email_id=os.environ.get("EMAIL_ID"),
+            inbox="yougotmail@outlook.com",
+            email_id="email_id_of_the_email_to_reply_to",
             email_body="This is a test reply to the email - AI signature",
             cc_recipients=[],
             bcc_recipients=[],
