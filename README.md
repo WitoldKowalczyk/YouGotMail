@@ -596,10 +596,8 @@ def test_replying_to_email():
             inbox=os.environ.get("INBOX_1"),
             email_id=os.environ.get("EMAIL_ID"),
             email_body="This is a test reply to the email - AI signature",
-            cc_recipients=["ai@delosone.com"],
-            attachments=[
-                "https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png"
-            ],
+            cc_recipients=[],
+            bcc_recipients=[],
         )
         print(reply_to_email)
     except Exception as e:

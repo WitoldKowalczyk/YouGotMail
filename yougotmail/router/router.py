@@ -223,7 +223,7 @@ class YouGotMail:
         deleted=False,
         sent=False,
         read="all",
-        storage=None,
+        storage=None
     ):
         return self.retrieve_attachments.get_attachments(
             inbox=inbox,
@@ -244,7 +244,7 @@ class YouGotMail:
             deleted=deleted,
             sent=sent,
             read=read,
-            storage=storage,
+            storage=storage
         )
 
     # Functions handling email sending

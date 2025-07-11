@@ -58,7 +58,7 @@ class RetrieveAttachments:
         deleted,
         sent,
         read,
-        storage,
+        storage
     ):
         try:
             attachments_list = []
@@ -90,7 +90,7 @@ class RetrieveAttachments:
                     archived,
                     deleted,
                     sent,
-                    read,
+                    read
                 )
                 if attachments_from_one_inbox is not None:
                     attachments_list.append(attachments_from_one_inbox)
@@ -128,7 +128,7 @@ class RetrieveAttachments:
         archived,
         deleted,
         sent,
-        read,
+        read
     ):
         try:
             url_filter = self.retrieval_utils._create_filter_url(
